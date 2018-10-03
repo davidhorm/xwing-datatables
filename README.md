@@ -9,9 +9,11 @@ This project depends on another project. You may need to update the submodule to
 git submodule update --init --recursive
 ```
 
-This project uses [Conventional Commits](https://conventionalcommits.org). That means commit messages should be prefixed with: `fix:` (patch version), `feat:` (minor version), or `BREAKING CHANGE:` (major version) for specific versioning. Commit messages may also be prefixed with: `docs:`, `style:`, `refactor:`, `perf:`, `test:`,  or others for non-versioning. Then run the following to update the CHANGELOG.md file.
+This project uses [Conventional Commits](https://conventionalcommits.org). That means commit messages should be prefixed with: `fix:` (patch version), `feat:` (minor version), or `BREAKING CHANGE:` (major version) for specific versioning. Commit messages may also be prefixed with: `docs:`, `style:`, `refactor:`, `perf:`, `test:`,  or others for non-versioning. Run the fllowing to commit, update CHANGELOG.md, and push to GitHub:
 ```
+git commit -a -m "<type>: <message>"
 npm run release
+git push --follow-tags origin master
 ```
 
 ## Technology
