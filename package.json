@@ -3,8 +3,11 @@
   "version": "0.2.2",
   "private": true,
   "homepage": "https://davidhorm.github.io/xwing-datatables",
-  "dependencies": {},
+  "dependencies": {
+    "npm": "^6.4.1"
+  },
   "scripts": {
+    "build": "node ./build/transform_xwing_data.js",
     "release": "standard-version"
   },
   "devDependencies": {
