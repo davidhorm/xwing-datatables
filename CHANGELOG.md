@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/davidhorm/xwing-datatables/compare/v0.3.0...v0.4.0) (2018-10-04)
+
+
+### Features
+
+* added excel table filter functionality ([f310d71](https://github.com/davidhorm/xwing-datatables/commit/f310d71))
+* adding transform_xwing_data.js and index.html ([d59dea9](https://github.com/davidhorm/xwing-datatables/commit/d59dea9))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/davidhorm/xwing-datatables/compare/v0.2.2...v0.3.0) (2018-10-04)
 
