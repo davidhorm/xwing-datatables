@@ -1,16 +1,28 @@
 <html>
     <head>
         <title>X-Wing DataTables</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        
+        <!-- DataTables-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        
+        <!-- table filter plugin -->
+        <script type="text/javascript" src="lib\excel-bootstrap-table-filter-bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="lib\excel-bootstrap-table-filter-style.css">
     </head>
     <body>
-        <table id="myTable" class="display">
+        <table id="pilotTable" class="display table table-bordered table-intel">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Caption</th>
+                    <th>Faction</th>
+                    <th>Ship</th>
+                    <th>Initiative</th>
+                    <th>Pilot Name</th>
+                    <th>Pilot Caption</th>
+                    <th>Limited</th>
+                    <th>Cost</th>
+                    <th>Ability</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -18,12 +30,25 @@
 
         <script type="text/javascript">
             $(document).ready( function () {
-                $('#myTable').DataTable({
+                var table = $('#pilotTable').DataTable({
                     "ajax": "data/pilots.json",
                     "columns": [
+                        {"data": "ship.faction"},
+                        {"data": "ship.name"},
+                        {"data": "initiative"},
                         {"data": "name"},
-                        {"data": "caption", "defaultContent": ""}
-                    ]
+                        {"data": "caption", "defaultContent": ""},
+                        {"data": "limited"},
+                        {"data": "cost"},
+                        {"data": "ability", "defaultContent": ""}
+                    ],
+                    "bSort": false, //disable sort because excelTableFilter plugin will handle it
+                    "paging": false //disable paging to show all data
+                });
+
+                //when table is drawn the first time, then draw the column filters
+                table.one( 'draw', function () {
+                    $('#pilotTable').excelTableFilter();
                 });
             });
         </script>
