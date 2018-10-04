@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/davidhorm/xwing-datatables/compare/v0.2.2...v0.3.0) (2018-10-04)
+
+
+### Features
+
+* translating xwing data to pilots.json dynamically. Index.html showing table ([d91697f](https://github.com/davidhorm/xwing-datatables/commit/d91697f))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/davidhorm/xwing-datatables/compare/v0.2.1...v0.2.2) (2018-10-03)
 
