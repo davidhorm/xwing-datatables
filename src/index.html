@@ -12,12 +12,8 @@
         <link rel="stylesheet" type="text/css" href="lib\excel-bootstrap-table-filter-style.css">
 
         <!-- styles -->
-        <link href="//fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-        <style>
-            body {
-                font-family: 'Roboto Condensed', sans-serif;
-            }
-        </style>
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
         <table id="pilotTable" class="display">
@@ -43,11 +39,11 @@
                     "columns": [
                         {"data": "ship.faction"},
                         {"data": "ship.name"},
-                        {"data": "initiative"},
+                        {"data": "initiative", "width": "90px", "className":"dt-body-center"},
                         {"data": "name"},
                         {"data": "caption", "defaultContent": ""},
-                        {"data": "limited"},
-                        {"data": "cost"},
+                        {"data": "limited", "width": "82px", "className":"dt-body-center"},
+                        {"data": "cost", "width": "61px", "className":"dt-body-center"},
                         {"data": "ability", "defaultContent": ""}
                     ],
                     "bSort": false, //disable sort because excelTableFilter plugin will handle it
