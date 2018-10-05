@@ -7,12 +7,18 @@
     "npm": "^6.4.1"
   },
   "scripts": {
-    "prebuild": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
+    "recreate-public-dir": "rimraf ./public && mkdirp ./public/lib && mkdirp ./public/data",
+    "update-submodule": "git submodule update --init --recursive",
+    "populate-public-dir": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
+    "prebuild": "npm run recreate-public-dir & npm run update-submodule && npm run populate-public-dir",
     "build": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.html -o ./public/index.html",
     "postbuild": "http-server",
     "release": "standard-version"
   },
   "devDependencies": {
+    "html-minifier": "^3.5.20",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2",
     "standard-version": "^4.4.0"
   }
 }

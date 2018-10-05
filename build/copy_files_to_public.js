@@ -8,4 +8,7 @@ fs.createReadStream('./submodules/excel-bootstrap-table-filter/dist/excel-bootst
 fs.createReadStream('./submodules/excel-bootstrap-table-filter/dist/excel-bootstrap-table-filter-style.css')
 .pipe(fs.createWriteStream('./public/lib/excel-bootstrap-table-filter-style.css'));
 
+fs.createReadStream('./src/favicon.ico')
+.pipe(fs.createWriteStream('./public/favicon.ico'));
+
 console.log("\n *END COPY FILES TO PUBLIC* \n");

@@ -16,7 +16,6 @@ factions.forEach(factionName => {
     var factionDir = `${pilotsDir}/${factionName}`;
     fs.readdirSync(factionDir).forEach(shipFileName => {
         var shipFilePath = `${factionDir}/${shipFileName}`;
-        console.log(`Now parsing ${shipFilePath}`);
 
         var content = fs.readFileSync(shipFilePath);
         var json = JSON.parse(content);
@@ -32,6 +31,6 @@ factions.forEach(factionName => {
 var pilotsData = {"data": pilotArray};
 var pilotsDataFilePath = "./public/data/pilots.json";
 fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
-console.log(`\n *WROTE ${pilotsDataFilePath}* \n`);
+console.log(`\n *CREATED ${pilotsDataFilePath} * \n`);
 
 console.log("\n *END TRANSFORM * \n");

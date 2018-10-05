@@ -9,7 +9,8 @@ https://davidhorm.github.io/xwing-datatables/ is my personal website to support 
 
 ### Built With
 * [standard-version](/conventional-changelog/standard-version) - for automatic versioning and CHANGELOG generation
-* [HTMLMinifier](https://www.npmjs.com/package/html-minifier)(installed globally) - for minifying html
+* [HTMLMinifier](https://www.npmjs.com/package/html-minifier) - for minifying html
+* [rimraf](/isaacs/rimraf) & [mkdirp](/substack/node-mkdirp) - because recreating a directory is crazy difficult using npm
 
 ### Usage
 
