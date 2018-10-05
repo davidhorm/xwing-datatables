@@ -14,47 +14,18 @@
         <!-- styles -->
         <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="index.css">
+
+        <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
         <table id="pilotTable" class="display">
-            <thead>
-                <tr>
-                    <th>Faction</th>
-                    <th>Ship</th>
-                    <th>Initiative</th>
-                    <th>Pilot Name</th>
-                    <th>Pilot Caption</th>
-                    <th>Limited</th>
-                    <th>Cost</th>
-                    <th>Ability</th>
-                </tr>
-            </thead>
+            <thead></thead>
             <tbody></tbody>
         </table>
-
         <script type="text/javascript">
-            $(document).ready( function () {
-                var table = $('#pilotTable').DataTable({
-                    "ajax": "data/pilots.json",
-                    "columns": [
-                        {"data": "ship.faction"},
-                        {"data": "ship.name"},
-                        {"data": "initiative", "width": "90px", "className":"dt-body-center"},
-                        {"data": "name"},
-                        {"data": "caption", "defaultContent": ""},
-                        {"data": "limited", "width": "82px", "className":"dt-body-center"},
-                        {"data": "cost", "width": "61px", "className":"dt-body-center"},
-                        {"data": "ability", "defaultContent": ""}
-                    ],
-                    "bSort": false, //disable sort because excelTableFilter plugin will handle it
-                    "paging": false //disable paging to show all data
-                });
-
-                //when table is drawn the first time, then draw the column filters
-                table.one( 'draw', function () {
-                    $('#pilotTable').excelTableFilter();
-                });
-            });
+        $(document).ready( function () {
+            loadDataTable();
+        });
         </script>
     </body>
 </html>

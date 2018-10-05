@@ -3,14 +3,15 @@ var fs = require('fs');
 console.log("\n *START TRANSFORM* \n");
 
 var factions = [
-    //"first-order", //not ready
+    //"first-order",
     "galactic-empire",
     "rebel-alliance",
-    //"resistance", //not ready
+    //"resistance",
     "scum-and-villainy"
 ]
 
-var pilotArray = [];
+var shipsArray = {};
+var pilotsArray = [];
 var pilotsDir = "./submodules/xwing-data2/data/pilots"
 factions.forEach(factionName => {
     var factionDir = `${pilotsDir}/${factionName}`;
@@ -22,15 +23,23 @@ factions.forEach(factionName => {
         var shipOnly = JSON.parse(content);
         delete shipOnly.pilots;
 
+        //store the ship xws key on the pilot object
         json.pilots.forEach(pilotObj => {
-            pilotObj.ship = shipOnly;
-            pilotArray.push(pilotObj);
+            pilotObj["ship_xws"] = shipOnly.xws;
+            pilotsArray.push(pilotObj);
         });
+
+        //store the ship information by xws key in a seperate array
+        shipsArray[shipOnly.xws] = shipOnly;
     });
 });
-var pilotsData = {"data": pilotArray};
+var pilotsData = {"data": pilotsArray};
 var pilotsDataFilePath = "./public/data/pilots.json";
 fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
 console.log(`\n *CREATED ${pilotsDataFilePath} * \n`);
+
+var shipsDataFilePath = "./public/data/ships.json";
+fs.writeFileSync(shipsDataFilePath, JSON.stringify(shipsArray));
+console.log(`\n *CREATED ${shipsDataFilePath} * \n`);
 
 console.log("\n *END TRANSFORM * \n");
