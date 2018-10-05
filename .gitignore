@@ -8,8 +8,6 @@
 
 # production
 /public
-/src/data/*.json
-/src/lib
 
 # misc
 .DS_Store

@@ -30,13 +30,8 @@ factions.forEach(factionName => {
     });
 });
 var pilotsData = {"data": pilotArray};
-var pilotsDataFilePath = "./src/data/pilots.json";
+var pilotsDataFilePath = "./public/data/pilots.json";
 fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
 console.log(`\n *WROTE ${pilotsDataFilePath}* \n`);
 
-console.log("\n *EXIT* \n");
-
-
-/*
-
-*/
+console.log("\n *END TRANSFORM * \n");

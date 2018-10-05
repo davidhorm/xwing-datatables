@@ -4,14 +4,16 @@ https://davidhorm.github.io/xwing-datatables/ is my personal website to support 
 
 ## Technology
 * [xwing-data2](/guidokessels/xwing-data2) - repository containing game data
-* [DataTables](https://www.datatables.net/) - jQuery plug-in for generating HTML Tables
+* [DataTables](https://www.datatables.net/) - jQuery plugin for generating HTML Tables
+* [excel-bootstrap-table-filter](/chestercharles/excel-bootstrap-table-filter) - jQuery plugin to generate an Excel-flavored table column filters
 
 ### Built With
 * [standard-version](/conventional-changelog/standard-version) - for automatic versioning and CHANGELOG generation
+* [HTMLMinifier](https://www.npmjs.com/package/html-minifier)(installed globally) - for minifying html
 
 ### Usage
 
-This project depends on another project. You may need to update the submodule to get the latest data.
+This project depends on other GitHub projects. You may need to update the submodules to get the latest data.
 ```
 git submodule update --init --recursive
 ```
