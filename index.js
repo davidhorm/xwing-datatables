@@ -1,4 +1,19 @@
 function loadDataTable(){
+
+    function populateTable(tableId, dataPath, columnsConfig) {
+        var pilotTable = $(tableId).DataTable({
+            "ajax": dataPath,
+            "columns": columnsConfig,
+            "bSort": false, //disable sort because excelTableFilter plugin will handle it
+            "paging": false //disable paging to show all data
+        });
+    
+        //when table is drawn the first time, then draw the column filters
+        pilotTable.one( 'draw', function () {
+            $(tableId).excelTableFilter();
+        });
+    }
+
     //first load ships data
     $.getJSON( "data/ships.json", function( shipsData ) {
         var pilotColumnsConfig = [
@@ -72,28 +87,14 @@ function loadDataTable(){
                 "className":"dt-body-center",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var stats = shipsData[ship_xws].stats;
-                    var stat = stats.filter(function(stat){ return stat.type === "attack"; });
-                    if(stat.length === 1){
-                        return stat[0].value
-                    }
-                    else if (stat.length === 2){
-                        return `${stat[0].value}, ${stat[1].value}`;
-                    }
+                    return  shipsData[ship_xws].attack_value;
                 }
             },
             {
                 "title":"Attack Arc",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var stats = shipsData[ship_xws].stats;
-                    var stat = stats.filter(function(stat){ return stat.type === "attack"; });
-                    if(stat.length === 1){
-                        return stat[0].arc
-                    }
-                    else if (stat.length === 2){
-                        return `${stat[0].arc}, ${stat[1].arc}`;
-                    }
+                    return  shipsData[ship_xws].attack_arc;
                 }
             },
             {
@@ -101,9 +102,7 @@ function loadDataTable(){
                 "className":"dt-body-center",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var stats = shipsData[ship_xws].stats;
-                    var stat = stats.filter(function(stat){ return stat.type === "agility"; });
-                    return stat[0].value;
+                    return shipsData[ship_xws].agility;
                 }
             },
             {
@@ -111,57 +110,64 @@ function loadDataTable(){
                 "className":"dt-body-center",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var stats = shipsData[ship_xws].stats;
-                    var stat = stats.filter(function(stat){ return stat.type === "hull"; });
-                    return stat[0].value;
+                    return shipsData[ship_xws].hull;
                 }
             },
             {
                 "title":"Shields",
                 "className":"dt-body-center",
+                "defaultContent": "",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var stats = shipsData[ship_xws].stats;
-                    var stat = stats.filter(function(stat){ return stat.type === "shields"; });
-                    return stat.length > 0 ? stat[0].value : "";
+                    return shipsData[ship_xws].shields;
                 }
             },
             {
                 "title":"Actions",
                 "data": "ship_xws",
                 "render": function ( ship_xws, type, row, meta ) {
-                    var actionsArray = [];
-                    var actions = shipsData[ship_xws].actions;
-                    actions.forEach(action => {
-                        var value = action.type;
-                        if(action.difficulty === "Red"){
-                            value += '!';
-                        }
-                        
-                        if(action.hasOwnProperty("linked")){
-                            value += ` > ${action.linked.type}`;
-                            if(action.linked.difficulty === "Red"){
-                                value += '!';
-                            }
-                        }
-
-                        actionsArray.push(`[${value}]`);
-                    });
-                    return actionsArray.join("<br>");
+                    return shipsData[ship_xws].actions;
                 }
             }
         ];
     
-        var pilotTable = $('#pilotTable').DataTable({
-            "ajax": "data/pilots.json",
-            "columns": pilotColumnsConfig,
-            "bSort": false, //disable sort because excelTableFilter plugin will handle it
-            "paging": false //disable paging to show all data
-        });
-    
-        //when table is drawn the first time, then draw the column filters
-        pilotTable.one( 'draw', function () {
-            $('#pilotTable').excelTableFilter();
-        });
+        populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
     });
+
+    var upgradeColumnsConfig = [
+        {
+            "title": "Name", 
+            "data": "name"
+        },
+        {
+            "title": "Limited", 
+            "data": "limited"
+        },
+        {
+            "title": "Slots", 
+            "data": "sides",
+            "render": function ( sides, type, row, meta ) {
+                return sides[0].slots.join(",");
+            }
+        },
+        {
+            "title": "Cost", 
+            "data": "cost.value",
+            "defaultContent": ""
+        },
+        {
+            "title": "Ability", 
+            "data": "sides",
+            "render": function ( sides, type, row, meta ) {
+                if (sides.length === 1) {
+                    return sides[0].hasOwnProperty("ability") ? sides[0].ability : "";
+                }
+                else if (sides.length === 2) {
+                    return `<div>${sides[0].title} - ${sides[0].ability}</div><div>${sides[1].title} - ${sides[1].ability}</div>`;
+                }
+            }
+        },
+    ];
+
+    populateTable("#upgradeTable", "data/upgrades.json", upgradeColumnsConfig);
 }
