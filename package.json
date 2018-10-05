@@ -1,13 +1,15 @@
 {
   "name": "xwing-datatables",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "homepage": "https://davidhorm.github.io/xwing-datatables",
   "dependencies": {
     "npm": "^6.4.1"
   },
   "scripts": {
-    "build": "node ./build/transform_xwing_data.js",
+    "prebuild": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
+    "build": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.html -o ./public/index.html",
+    "postbuild": "http-server",
     "release": "standard-version"
   },
   "devDependencies": {
