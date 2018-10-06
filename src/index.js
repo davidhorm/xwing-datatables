@@ -1,3 +1,19 @@
+function setClickHandlers() {
+    $('#pilotLink').click(e => {
+        e.preventDefault(); 
+        $('#upgradeDiv').hide();
+        $('#pilotDiv').show();
+        return false;
+    });
+    
+    $('#upgradeLink').click(e => {
+        e.preventDefault(); 
+        $('#pilotDiv').hide();
+        $('#upgradeDiv').show();
+        return false;
+    });
+}
+
 function loadDataTable(){
 
     function populateTable(tableId, dataPath, columnsConfig) {

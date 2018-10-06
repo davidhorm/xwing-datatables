@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-table.dataTable thead th {
+table.dataTable thead th, h1 {
     font-family: 'Roboto', sans-serif;
     text-align: left;
     padding: 10px 13px;

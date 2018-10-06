@@ -18,18 +18,28 @@
         <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
-        <table id="pilotTable" class="display">
-            <thead></thead>
-            <tbody></tbody>
-        </table>
+        <a id="pilotLink" href="#">Pilots</a>
+        <a id="upgradeLink" href="#">Upgrades</a>
 
-        <table id="upgradeTable" class="display">
-            <thead></thead>
-            <tbody></tbody>
-        </table>
+        <div id="pilotDiv">
+            <h1>Pilots</h1>
+            <table id="pilotTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="upgradeDiv" style="display: none;">
+            <h1>Upgrades</h1>
+            <table id="upgradeTable" style="width:100%">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
 
         <script type="text/javascript">
         $(document).ready( function () {
+            setClickHandlers();
             loadDataTable();
         });
         </script>
