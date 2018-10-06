@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/davidhorm/xwing-datatables/compare/v0.6.0...v0.6.1) (2018-10-06)
+
+
+### Bug Fixes
+
+* parsing all Upgrade fields ([1f29b58](https://github.com/davidhorm/xwing-datatables/commit/1f29b58))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/davidhorm/xwing-datatables/compare/v0.5.0...v0.6.0) (2018-10-05)
 
