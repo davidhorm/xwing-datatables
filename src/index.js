@@ -137,36 +137,54 @@ function loadDataTable(){
     var upgradeColumnsConfig = [
         {
             "title": "Name", 
-            "data": "name"
+            "data": "title"
         },
         {
             "title": "Limited", 
-            "data": "limited"
+            "data": "limited",
+            "className":"dt-body-center"
         },
         {
             "title": "Slots", 
-            "data": "sides",
-            "render": function ( sides, type, row, meta ) {
-                return sides[0].slots.join(",");
-            }
+            "data": "slots",
+            "render": "[, ]"
         },
         {
             "title": "Cost", 
-            "data": "cost.value",
+            "data": "cost",
+            "className":"dt-body-center",
+            "defaultContent": ""
+        },
+        {
+            "title": "Variable Cost", 
+            "data": "variable_cost",
             "defaultContent": ""
         },
         {
             "title": "Ability", 
-            "data": "sides",
-            "render": function ( sides, type, row, meta ) {
-                if (sides.length === 1) {
-                    return sides[0].hasOwnProperty("ability") ? sides[0].ability : "";
-                }
-                else if (sides.length === 2) {
-                    return `<div>${sides[0].title} - ${sides[0].ability}</div><div>${sides[1].title} - ${sides[1].ability}</div>`;
-                }
-            }
+            "data": "ability",
+            "defaultContent": ""
         },
+        {
+            "title": "Restrictions", 
+            "data": "restrictions",
+            "defaultContent": ""
+        },
+        {
+            "title": "Add Actions", 
+            "data": "actions",
+            "defaultContent": ""
+        },
+        {
+            "title": "Add Slots", 
+            "data": "add_slots",
+            "defaultContent": ""
+        },
+        {
+            "title": "Remove Slots", 
+            "data": "remove_slots",
+            "defaultContent": ""
+        }
     ];
 
     populateTable("#upgradeTable", "data/upgrades.json", upgradeColumnsConfig);
