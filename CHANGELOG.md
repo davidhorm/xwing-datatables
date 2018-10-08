@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/davidhorm/xwing-datatables/compare/v0.6.4...v0.7.0) (2018-10-08)
+
+
+### Features
+
+* enabled excel export button ([13d941a](https://github.com/davidhorm/xwing-datatables/commit/13d941a))
+
+
+### Performance Improvements
+
+* merging ship.json into pilot.json because it saves a second while building filters ([49ea25b](https://github.com/davidhorm/xwing-datatables/commit/49ea25b))
+
+
+
 <a name="0.6.4"></a>
 ## [0.6.4](https://github.com/davidhorm/xwing-datatables/compare/v0.6.3...v0.6.4) (2018-10-08)
 
