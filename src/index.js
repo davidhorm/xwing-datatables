@@ -1,5 +1,5 @@
 function setClickHandlers() {
-    const tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
+    var tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
     tabBar.preventDefaultOnClick = true;
 
     tabBar.listen("MDCTabBar:activated", function(t) {
@@ -19,15 +19,32 @@ function setClickHandlers() {
 function loadDataTable(){
 
     function populateTable(tableId, dataPath, columnsConfig) {
-        var pilotTable = $(tableId).DataTable({
+        var table = $(tableId).DataTable({
             "ajax": dataPath,
             "columns": columnsConfig,
             "bSort": false, //disable sort because excelTableFilter plugin will handle it
-            "paging": false //disable paging to show all data
+            "paging": false, //disable paging to show all data
+
+            //enable excel export button
+            "dom": "Bfrtip",
+            "buttons": [
+                {
+                    "extend": "excel",
+                    "title": null,
+                    "exportOptions": {
+                        "format": {
+                            "header": function(data, columnId) {
+                                var removeAt = data.indexOf("<div"); //remove filter text from header
+                                return data.substr(0,removeAt);
+                            }
+                        }
+                    }
+                }
+            ]
         });
-    
+
         //when table is drawn the first time, then draw the column filters
-        pilotTable.one( 'draw', function () {
+        table.one( 'draw', function () {
             $(tableId).excelTableFilter();
         });
     }

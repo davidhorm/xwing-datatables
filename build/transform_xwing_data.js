@@ -43,8 +43,8 @@ function createPilotShipJson() {
 
 			//store ship data on pilot
 			json.pilots.forEach(pilotObj => {
+				pilotObj["pilot_name"] = pilotObj.name;
 				var mergedObj = Object.assign(pilotObj, shipOnly);
-				mergedObj["pilot_name"] = pilotObj.name;
 				delete mergedObj.name;
 				pilotsArray.push(mergedObj);
 			});

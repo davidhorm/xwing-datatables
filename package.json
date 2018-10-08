@@ -12,7 +12,7 @@
     "update-submodule": "git submodule update --init --recursive",
     "populate-public-dir": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
     "public-dir": "npm run update-submodule & npm run remove-public-dir && npm run populate-public-dir",
-    "minify-js": "html-minifier ./src/index.js -o ./public/index.js",
+    "minify-js": "uglifyjs ./src/index.js -o ./public/index.js",
     "minify-css": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.css -o ./public/index.css",
     "minify-html": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.html -o ./public/index.html",
     "minify": "npm run minify-js & npm run minify-css & npm run minify-html",
@@ -28,6 +28,7 @@
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
     "rimraf": "^2.6.2",
-    "standard-version": "^4.4.0"
+    "standard-version": "^4.4.0",
+    "uglify-js": "^3.4.9"
   }
 }
