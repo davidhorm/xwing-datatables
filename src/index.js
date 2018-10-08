@@ -37,10 +37,7 @@ function loadDataTable(){
         var pilotColumnsConfig = [
             {
                 "title": "Faction",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].faction;
-                }
+                "data": "faction"
             },
             {
                 "title":"Ship Name",

@@ -37,9 +37,13 @@ function createPilotShipJson() {
 			var shipOnly = JSON.parse(content);
 			delete shipOnly.pilots;
 
-			//store the ship xws key on the pilot object
 			json.pilots.forEach(pilotObj => {
+				//store the ship xws key on the pilot object
 				pilotObj["ship_xws"] = shipOnly.xws;
+
+				//faction should be stored at the pilot level because of the duplicate ships across factions (i.e. tie/ln fighter)
+				pilotObj["faction"] = shipOnly.faction;
+
 				pilotsArray.push(pilotObj);
 			});
 
@@ -74,12 +78,13 @@ function getModifiedShipJson(shipJson) {
 		shipJson["attack_arc"] += `, ${attackValues[1].arc}`;
 	}
 	
-	//no longer need stats
-	delete shipJson.stats;
-
 	//now parse actions
 	var actionsArray = getActionsArray(shipJson.actions);
 	shipJson.actions = actionsArray;
+
+	//no longer need stats & factions
+	delete shipJson.stats;
+	delete shipJson.faction;
 					
 	return shipJson;
 }
