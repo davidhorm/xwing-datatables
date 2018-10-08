@@ -32,122 +32,94 @@ function loadDataTable(){
         });
     }
 
-    //first load ships data
-    $.getJSON( "data/ships.json", function( shipsData ) {
-        var pilotColumnsConfig = [
-            {
-                "title": "Faction",
-                "data": "faction"
-            },
-            {
-                "title":"Ship Name",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].name;
-                }
-            },
-            {
-                "title": "Initiative",
-                "data": "initiative",
-                //"width": "90px",
-                "className":"dt-body-center"
-            },
-            {
-                "title": "Pilot Name", 
-                "data": "name"
-            },
-            {
-                "title": "Caption",
-                "data": "caption",
-                "defaultContent": ""
-            },
-            {
-                "title": "Limited",
-                "data": "limited",
-                //"width": "82px",
-                "className":"dt-body-center"
-            },
-            {
-                "title": "Cost",
-                "data": "cost",
-                //"width": "61px",
-                "className":"dt-body-center"
-            },
-            {
-                "title": "Ability", 
-                "data": "ability",
-                "defaultContent": ""
-            },
-            {
-                "title": "Slots",
-                "data": "slots",
-                "render":"[, ]"
-            },
-            {
-                "title":"Size",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].size;
-                }
-            },
-            {
-                "title":"Dial",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].dial.join(", ");
-                }
-            },
-            {
-                "title":"Attack Value",
-                "className":"dt-body-center",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return  shipsData[ship_xws].attack_value;
-                }
-            },
-            {
-                "title":"Attack Arc",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return  shipsData[ship_xws].attack_arc;
-                }
-            },
-            {
-                "title":"Agility",
-                "className":"dt-body-center",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].agility;
-                }
-            },
-            {
-                "title":"Hull",
-                "className":"dt-body-center",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].hull;
-                }
-            },
-            {
-                "title":"Shields",
-                "className":"dt-body-center",
-                "defaultContent": "",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].shields;
-                }
-            },
-            {
-                "title":"Actions",
-                "data": "ship_xws",
-                "render": function ( ship_xws, type, row, meta ) {
-                    return shipsData[ship_xws].actions;
-                }
-            }
-        ];
+    var pilotColumnsConfig = [
+        {
+            "title": "Faction",
+            "data": "faction"
+        },
+        {
+            "title":"Ship Name",
+            "data": "ship_name"
+        },
+        {
+            "title": "Initiative",
+            "data": "initiative",
+            //"width": "90px",
+            "className":"dt-body-center"
+        },
+        {
+            "title": "Pilot Name", 
+            "data": "pilot_name"
+        },
+        {
+            "title": "Caption",
+            "data": "caption",
+            "defaultContent": ""
+        },
+        {
+            "title": "Limited",
+            "data": "limited",
+            //"width": "82px",
+            "className":"dt-body-center"
+        },
+        {
+            "title": "Cost",
+            "data": "cost",
+            //"width": "61px",
+            "className":"dt-body-center"
+        },
+        {
+            "title": "Ability", 
+            "data": "ability",
+            "defaultContent": ""
+        },
+        {
+            "title": "Slots",
+            "data": "slots",
+            "render":"[, ]"
+        },
+        {
+            "title":"Size",
+            "data": "size"
+        },
+        {
+            "title":"Dial",
+            "data": "dial",
+            "render":"[, ]"
+        },
+        {
+            "title":"Attack Value",
+            "className":"dt-body-center",
+            "data": "attack_value"
+        },
+        {
+            "title":"Attack Arc",
+            "data": "attack_arc"
+        },
+        {
+            "title":"Agility",
+            "className":"dt-body-center",
+            "data": "agility"
+        },
+        {
+            "title":"Hull",
+            "className":"dt-body-center",
+            "data": "hull"
+        },
+        {
+            "title":"Shields",
+            "className":"dt-body-center",
+            "defaultContent": "",
+            "data": "shields"
+        },
+        {
+            "title":"Actions",
+            "data": "actions"
+        }
+    ];
+
+    populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
     
-        populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
-    });
 
     var upgradeColumnsConfig = [
         {

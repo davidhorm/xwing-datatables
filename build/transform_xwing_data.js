@@ -22,6 +22,7 @@ mkdirp("./public/data", function (err) {
     }
 });
 
+//used when parsing upgrades.json
 var shipsArray = {};
 
 function createPilotShipJson() {
@@ -34,34 +35,31 @@ function createPilotShipJson() {
 
 			var content = fs.readFileSync(shipFilePath);
 			var json = JSON.parse(content);
-			var shipOnly = JSON.parse(content);
-			delete shipOnly.pilots;
-
-			json.pilots.forEach(pilotObj => {
-				//store the ship xws key on the pilot object
-				pilotObj["ship_xws"] = shipOnly.xws;
-
-				//faction should be stored at the pilot level because of the duplicate ships across factions (i.e. tie/ln fighter)
-				pilotObj["faction"] = shipOnly.faction;
-
-				pilotsArray.push(pilotObj);
-			});
-
+			
 			//store the ship information by xws key in a seperate array
-			shipsArray[shipOnly.xws] = getModifiedShipJson(shipOnly);
+			var shipOnly = JSON.parse(content);
+			shipOnly = getModifiedShipJson(shipOnly);
+			shipsArray[shipOnly.xws] = shipOnly;
+
+			//store ship data on pilot
+			json.pilots.forEach(pilotObj => {
+				var mergedObj = Object.assign(pilotObj, shipOnly);
+				mergedObj["pilot_name"] = pilotObj.name;
+				delete mergedObj.name;
+				pilotsArray.push(mergedObj);
+			});
 		});
 	});
 	var pilotsData = {"data": pilotsArray};
 	var pilotsDataFilePath = "./public/data/pilots.json";
 	fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
 	console.log(`\n *CREATED ${pilotsDataFilePath} * \n`);
-
-	var shipsDataFilePath = "./public/data/ships.json";
-	fs.writeFileSync(shipsDataFilePath, JSON.stringify(shipsArray));
-	console.log(`\n *CREATED ${shipsDataFilePath} * \n`);
 }
 
 function getModifiedShipJson(shipJson) {
+	//copy name into ship_name so it doesn't collide with pilot_name
+	shipJson["ship_name"] = shipJson.name;
+
 	//first handle  agility, hull, shield values
 	shipJson.stats.forEach(stat => {
 		if(stat.type !== "attack") {
@@ -77,15 +75,15 @@ function getModifiedShipJson(shipJson) {
 		shipJson["attack_value"] += `, ${attackValues[1].value}`;
 		shipJson["attack_arc"] += `, ${attackValues[1].arc}`;
 	}
-	
+
+	//no longer need stats & pilots data
+	delete shipJson.stats;
+	delete shipJson.pilots;
+
 	//now parse actions
 	var actionsArray = getActionsArray(shipJson.actions);
 	shipJson.actions = actionsArray;
-
-	//no longer need stats & factions
-	delete shipJson.stats;
-	delete shipJson.faction;
-					
+				
 	return shipJson;
 }
 
