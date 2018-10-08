@@ -1,16 +1,18 @@
 function setClickHandlers() {
-    $('#pilotLink').click(e => {
-        e.preventDefault(); 
-        $('#upgradeDiv').hide();
-        $('#pilotDiv').show();
-        return false;
-    });
-    
-    $('#upgradeLink').click(e => {
-        e.preventDefault(); 
-        $('#pilotDiv').hide();
-        $('#upgradeDiv').show();
-        return false;
+    const tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
+    tabBar.preventDefaultOnClick = true;
+
+    tabBar.listen("MDCTabBar:activated", function(t) {
+        var tabIndex = t.detail.index;
+        
+        if(tabIndex === 0) {
+            $('#upgradeDiv').hide();
+            $('#pilotDiv').show();
+        }
+        else if (tabIndex === 1) {
+            $('#pilotDiv').hide();
+            $('#upgradeDiv').show();
+        }
     });
 }
 

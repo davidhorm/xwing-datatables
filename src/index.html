@@ -11,18 +11,49 @@
         <script type="text/javascript" src="lib\excel-bootstrap-table-filter-bundle.min.js"></script>
         <link rel="stylesheet" type="text/css" href="lib\excel-bootstrap-table-filter-style.css">
 
+        <!-- MDC Tab Bars -->
+        <script type="text/javascript" src="lib/@material/tab-bar/dist/mdc.tabBar.min.js"></script>
+        
         <!-- styles -->
         <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="index.css">
 
+        <!-- app -->
         <script type="text/javascript" src="index.js"></script>
     </head>
     <body>
-        <a id="pilotLink" href="#">Pilots</a>
-        <a id="upgradeLink" href="#">Upgrades</a>
+        <!-- https://material.io/develop/web/components/tabs/tab-bar/ format -->
+        <div class="mdc-tab-bar" role="tablist">
+            <div class="mdc-tab-scroller">
+                <div class="mdc-tab-scroller__scroll-area">
+                    <div class="mdc-tab-scroller__scroll-content">
+                        
+                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Pilots</span>
+                            </span>
+                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                            <span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
+                        </button>
 
+                        
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+							<span class="mdc-tab__content">
+								<span class="mdc-tab__text-label">Upgrades</span>
+							</span>
+							<span class="mdc-tab-indicator">
+								<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+							</span>
+							<span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
+						</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div id="pilotDiv">
-            <h1>Pilots</h1>
             <table id="pilotTable">
                 <thead></thead>
                 <tbody></tbody>
@@ -30,7 +61,6 @@
         </div>
 
         <div id="upgradeDiv" style="display: none;">
-            <h1>Upgrades</h1>
             <table id="upgradeTable" style="width:100%">
                 <thead></thead>
                 <tbody></tbody>

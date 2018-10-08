@@ -4,13 +4,14 @@
   "private": true,
   "homepage": "https://davidhorm.github.io/xwing-datatables",
   "dependencies": {
+    "@material/tab-bar": "^0.40.0",
     "npm": "^6.4.1"
   },
   "scripts": {
-    "recreate-public-dir": "rimraf ./public && mkdirp ./public/lib && mkdirp ./public/data",
+    "remove-public-dir": "rimraf ./public",
     "update-submodule": "git submodule update --init --recursive",
     "populate-public-dir": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
-    "public-dir": "npm run recreate-public-dir & npm run update-submodule && npm run populate-public-dir",
+    "public-dir": "npm run update-submodule & npm run remove-public-dir && npm run populate-public-dir",
     "minify-js": "html-minifier ./src/index.js -o ./public/index.js",
     "minify-css": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.css -o ./public/index.css",
     "minify-html": "html-minifier --collapse-whitespace --minify-css --minify-js --remove-comments ./src/index.html -o ./public/index.html",
@@ -22,8 +23,10 @@
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
+    "glob": "^7.1.3",
     "html-minifier": "^3.5.20",
     "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
     "rimraf": "^2.6.2",
     "standard-version": "^4.4.0"
   }

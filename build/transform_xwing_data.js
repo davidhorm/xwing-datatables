@@ -1,4 +1,5 @@
 /* Transform the JSON from xwing-data2 to a readable format consumed by DataTables  */
+var mkdirp = require('mkdirp');
 var fs = require('fs');
 console.log("\n *START TRANSFORM* \n");
 
@@ -9,6 +10,17 @@ var factions = [
     //"resistance",
     "scum-and-villainy"
 ];
+
+//create data folder before creating .json files
+mkdirp("./public/data", function (err) {
+	if (err) {
+    	console.error(err);
+    }
+    else {
+		createPilotShipJson();
+		createUpgradesJson();
+    }
+});
 
 var shipsArray = {};
 
@@ -201,8 +213,5 @@ function getRestrictions(restrictions) {
 		return restrictionsArray.join(", ");
 	}
 }
-
-createPilotShipJson();
-createUpgradesJson();
 
 console.log("\n *END TRANSFORM * \n");
