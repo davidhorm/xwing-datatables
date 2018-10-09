@@ -138,10 +138,10 @@ function getActionsArray(actions) {
  */
 function setForceAndCharges(json) {
 	if(json.hasOwnProperty("force") && json.force.recovers === 1) {
-		json.force.value += "^";
+		json.force.value += "▴";
 	}
 	if(json.hasOwnProperty("charges") && json.charges.recovers === 1) {
-		json.charges.value += "^";
+		json.charges.value += "▴";
 	}
 }
 
