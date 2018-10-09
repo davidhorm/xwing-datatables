@@ -31,7 +31,25 @@ function loadDataTables() {
 }
 
 function populateTable(tableId, dataPath, columnsConfig) {
-    var buttonConfig = {
+    var table = $(tableId).DataTable({
+        "ajax": dataPath,
+        "columns": columnsConfig,
+        "bSort": false, //disable sort because excelTableFilter plugin will handle it
+        "paging": false, //disable paging to show all data
+
+        //enable excel export button
+        "dom": "Bfrtip",
+        "buttons": getButtonsConfig()
+    });
+
+    //when table is drawn the first time, then draw the column filters
+    table.one( 'draw', function () {
+        $(tableId).excelTableFilter();
+    });
+}
+
+function getButtonsConfig() {
+    var buttonsConfig = {
         "dom": {
             "button": {
                 //replace dt-button class added by datatable with mdc class name
@@ -54,29 +72,15 @@ function populateTable(tableId, dataPath, columnsConfig) {
                         "header": function(data, columnId) {
                             //remove filter text from column header
                             var removeAt = data.indexOf("<div"); 
-                            return data.substr(0,removeAt);
+                            return removeAt > 0 ? data.substr(0,removeAt) : data;
                         }
                     }
                 }
             }
         ]
     };
-    
-    var table = $(tableId).DataTable({
-        "ajax": dataPath,
-        "columns": columnsConfig,
-        "bSort": false, //disable sort because excelTableFilter plugin will handle it
-        "paging": false, //disable paging to show all data
 
-        //enable excel export button
-        "dom": "Bfrtip",
-        "buttons": buttonConfig
-    });
-
-    //when table is drawn the first time, then draw the column filters
-    table.one( 'draw', function () {
-        $(tableId).excelTableFilter();
-    });
+    return buttonsConfig;
 }
 
 function populatePilotTable() {
@@ -180,8 +184,13 @@ function populatePilotTable() {
             "data": "charges.value"
         },
         {
-            "title":"Image",
-            "data": "image"
+            "title":"Image Link",
+            "data": "image_link"
+        },
+        {
+            "title":"Image Url",
+            "data": "image",
+            "visible": false //hidden in browser, but shown in excel
         }
     ];
 
@@ -281,9 +290,15 @@ function populateUpgradeTable() {
             "defaultContent": ""
         },
         {
-            "title": "Image", 
-            "data": "image",
+            "title":"Image Link",
+            "data": "image_link",
             "defaultContent": "" //broken image url for one record
+        },
+        {
+            "title":"Image Url",
+            "data": "image",
+            "defaultContent": "", //broken image url for one record
+            "visible": false //hidden in browser, but shown in excel
         }
     ];
 

@@ -68,7 +68,7 @@ function createPilotShipJson() {
 				}
 
 				setForceAndCharges(mergedObj);
-				setImage(mergedObj);
+				setImageLink(mergedObj);
 				
 				pilotsArray.push(mergedObj);
 			});
@@ -146,13 +146,9 @@ function setForceAndCharges(json) {
 	}
 }
 
-/**
- * Convert image url to <a href="...">
- * @param {*} json 
- */
-function setImage(json) {
+function setImageLink(json) {
 	if(json.hasOwnProperty("image")) {
-		json["image"] = `<a href="${json.image}">image</a>`;
+		json["image_link"] = `<a href="${json.image}">image</a>`;
 	}
 }
 
@@ -189,7 +185,7 @@ function createUpgradesJson() {
 					setAddRemoveSlots(side);
 					setForceAndCharges(side);
 					setAttack(side);
-					setImage(side);
+					setImageLink(side);
 
 					upgradesArray.push(side);
 				}
