@@ -1,15 +1,9 @@
 /* Transform the JSON from xwing-data2 to a readable format consumed by DataTables  */
 var mkdirp = require('mkdirp');
 var fs = require('fs');
-console.log("\n *START TRANSFORM* \n");
+var glob = require("glob");
 
-var factions = [
-    //"first-order",
-    "galactic-empire",
-    "rebel-alliance",
-    //"resistance",
-    "scum-and-villainy"
-];
+console.log("\n *START TRANSFORM* \n");
 
 //create data folder before creating .json files
 mkdirp("./public/data", function (err) {
@@ -17,39 +11,68 @@ mkdirp("./public/data", function (err) {
     	console.error(err);
     }
     else {
+		setConditionsJson();
 		createPilotShipJson();
 		createUpgradesJson();
+		console.log("\n *END TRANSFORM * \n");
     }
 });
 
-//used when parsing upgrades.json
-var shipsArray = {};
+var shipsArray = {}; //used when parsing upgrades.json
+var conditions = {}; //some pilots and upgrade cards cause conditions
+
+function setConditionsJson() {
+	var conditionFilePath = "./submodules/xwing-data2/data/conditions/conditions.json"
+	var content = fs.readFileSync(conditionFilePath);
+	var json = JSON.parse(content);
+	json.forEach(condition => {
+		conditions[condition.xws] = condition;
+	});
+}
 
 function createPilotShipJson() {
     var pilotsArray = [];
-    var pilotsDir = "./submodules/xwing-data2/data/pilots"
-	factions.forEach(factionName => {
-		var factionDir = `${pilotsDir}/${factionName}`;
-		fs.readdirSync(factionDir).forEach(shipFileName => {
-			var shipFilePath = `${factionDir}/${shipFileName}`;
+	var pilotsDir = "./submodules/xwing-data2/data/pilots/*/*.json"
+	var shipFilePaths = glob.sync(pilotsDir);
+	shipFilePaths.forEach(shipFilePath => {
+		var content = fs.readFileSync(shipFilePath);
+		var json = JSON.parse(content);
 
-			var content = fs.readFileSync(shipFilePath);
-			var json = JSON.parse(content);
-			
+		//only parse pilot content if ffg id is defined (to filter out preview content)
+		if(json.hasOwnProperty("ffg")) {
+
 			//store the ship information by xws key in a seperate array
 			var shipOnly = JSON.parse(content);
+			var shipOnlyActions = shipOnly.actions;
+			delete shipOnly.actions;
 			shipOnly = getModifiedShipJson(shipOnly);
 			shipsArray[shipOnly.xws] = shipOnly;
-
+			
 			//store ship data on pilot
 			json.pilots.forEach(pilotObj => {
-				pilotObj["pilot_name"] = pilotObj.name;
+				pilotObj["pilot_name"] = pilotObj.name; //assign to pilot_name so it doesn't conflict with name
+				pilotObj["actions"] = getActionsArray(pilotObj.shipActions || shipOnlyActions); // some pilots have actions different than the ship (i.e. calculate)
 				var mergedObj = Object.assign(pilotObj, shipOnly);
 				delete mergedObj.name;
+
+				//append condition ability to pilot ability
+				if(mergedObj.hasOwnProperty("conditions") && mergedObj.conditions.length > 0) {
+					var condition = conditions[mergedObj.conditions[0]];
+					pilotObj.ability += `<div></div>${condition.name} - ${condition.ability}`;
+				}
+
+				//format shipAbility to be `${name} - ${text}`
+				if(mergedObj.hasOwnProperty("shipAbility")) {
+					mergedObj.shipAbility = `${mergedObj.shipAbility.name} - ${mergedObj.shipAbility.text}`
+				}
+
+				setForceAndCharges(mergedObj);
+				
 				pilotsArray.push(mergedObj);
 			});
-		});
+		}
 	});
+
 	var pilotsData = {"data": pilotsArray};
 	var pilotsDataFilePath = "./public/data/pilots.json";
 	fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
@@ -81,8 +104,8 @@ function getModifiedShipJson(shipJson) {
 	delete shipJson.pilots;
 
 	//now parse actions
-	var actionsArray = getActionsArray(shipJson.actions);
-	shipJson.actions = actionsArray;
+	//var actionsArray = getActionsArray(shipJson.actions);
+	//shipJson.actions = actionsArray;
 				
 	return shipJson;
 }
@@ -108,34 +131,59 @@ function getActionsArray(actions) {
 	return actionsArray;
 }
 
+/**
+ * if force/charges can recover, then append ^
+ * @param {*} json 
+ */
+function setForceAndCharges(json) {
+	if(json.hasOwnProperty("force") && json.force.recovers === 1) {
+		json.force.value += "^";
+	}
+	if(json.hasOwnProperty("charges") && json.charges.recovers === 1) {
+		json.charges.value += "^";
+	}
+}
+
 function createUpgradesJson() {
 	var upgradesArray = [];
-	var upgradeDir = "./submodules/xwing-data2/data/upgrades";
-	fs.readdirSync(upgradeDir).forEach(upgradeFileName => {
-		var upgradeFilePath = `${upgradeDir}/${upgradeFileName}`;
+	var upgradeDir = "./submodules/xwing-data2/data/upgrades/*.json";
+	var upgradeFilePaths = glob.sync(upgradeDir);
+	upgradeFilePaths.forEach(upgradeFilePath => {
 		var content = fs.readFileSync(upgradeFilePath);
 		var json = JSON.parse(content);
-
 		json.forEach(upgrade => {
 
 			var restrictions = getRestrictions(upgrade.restrictions);
 
 			upgrade.sides.forEach(side => {
-				side["restrictions"] = restrictions;
-				side["limited"] = upgrade.limited;
+				//only parse upgrade content if ffg id is defined (to filter out preview content)
+				if(side.hasOwnProperty("ffg")) {
+					side["restrictions"] = restrictions;
+					side["limited"] = upgrade.limited;
 
-				if(side.hasOwnProperty("actions")) {
-					var actionsArray = getActionsArray(side.actions);
-					side.actions = actionsArray;
+					if(side.hasOwnProperty("actions")) {
+						var actionsArray = getActionsArray(side.actions);
+						side.actions = actionsArray;
+					}
+
+					//append condition ability to upgrade ability
+					if(side.hasOwnProperty("conditions") && side.conditions.length > 0) {
+						var condition = conditions[side.conditions[0]];
+						side.ability += `<div></div>${condition.name} - ${condition.ability}`;
+					}
+					
+					setCost(side, upgrade.cost);
+					setAddStats(side);
+					setAddRemoveSlots(side);
+					setForceAndCharges(side);
+					setAttack(side);
+
+					upgradesArray.push(side);
 				}
-				
-				setCost(side, upgrade.cost);
-				setAddRemoveSlots(side);
-
-				upgradesArray.push(side);
 			});
 		});
 	});
+
 	var upgradesData = {"data": upgradesArray};
 	var upgradesDataFilePath = "./public/data/upgrades.json";
 	fs.writeFileSync(upgradesDataFilePath, JSON.stringify(upgradesData));
@@ -152,7 +200,7 @@ function setCost(side, cost) {
 	}
 	else if(cost.hasOwnProperty("variable") && cost.hasOwnProperty("values")) {
 		var variableCost = [];
-		var variable = cost.variable.charAt(0).toUpperCase() + cost.variable.slice(1);
+		var variable = capitalize(cost.variable);
 		for (var key in cost.values) {
 			if(cost.values.hasOwnProperty(key)) {
 				var value = `${variable}-${key} = ${cost.values[key]}`;
@@ -161,6 +209,24 @@ function setCost(side, cost) {
 		}
 		side["variable_cost"] = variableCost.join(", ");
 	}
+}
+
+function setAddStats(side) {
+	var statsArray = [];
+	if(side.hasOwnProperty("grants")) {
+		side.grants.forEach(grant => {
+			if(grant.type === "stat") {
+				var value = `${capitalize(grant.value)} = ${grant.amount}`;
+				statsArray.push(value);
+			}
+		});
+
+		side["add_stats"] = statsArray.join(", ");
+	}
+}
+
+function capitalize(word) {
+	return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 function setAddRemoveSlots(side) {
@@ -201,7 +267,7 @@ function getRestrictions(restrictions) {
 			}
 			else if(restriction.hasOwnProperty("ships")) {
 				restriction.ships.forEach(ship_xws => {
-					restrictionsArray.push(shipsArray[ship_xws].name);
+					restrictionsArray.push(shipsArray[ship_xws].name || ""); //add "" for preview content
 				});
 			}
 			else if(restriction.hasOwnProperty("action")) {
@@ -217,4 +283,13 @@ function getRestrictions(restrictions) {
 	}
 }
 
-console.log("\n *END TRANSFORM * \n");
+function setAttack(side) {
+	if(side.hasOwnProperty("attack")) {
+		side["attack_arc"] = side.attack.arc;
+		side["attack_value"] = side.attack.value;
+		side["attack_range"] = `${side.attack.minrange}-${side.attack.maxrange}`;
+		side["attack_ordnance"] = side.attack.ordnance;
+
+		delete side.attack;
+	}
+}

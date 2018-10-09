@@ -28,8 +28,9 @@ function loadDataTable(){
             //enable excel export button
             "dom": "Bfrtip",
             "buttons": [
+                "colvis",   //column visibility button
                 {
-                    "extend": "excel",
+                    "extend": "excel",  //export to excel button
                     "title": null,
                     "exportOptions": {
                         "format": {
@@ -51,20 +52,6 @@ function loadDataTable(){
 
     var pilotColumnsConfig = [
         {
-            "title": "Faction",
-            "data": "faction"
-        },
-        {
-            "title":"Ship Name",
-            "data": "ship_name"
-        },
-        {
-            "title": "Initiative",
-            "data": "initiative",
-            //"width": "90px",
-            "className":"dt-body-center"
-        },
-        {
             "title": "Pilot Name", 
             "data": "pilot_name"
         },
@@ -74,9 +61,23 @@ function loadDataTable(){
             "defaultContent": ""
         },
         {
+            "title": "Faction",
+            "data": "faction"
+        },
+        {
+            "title":"Ship Name",
+            "data": "ship_name"
+        },
+        {
             "title": "Limited",
             "data": "limited",
             //"width": "82px",
+            "className":"dt-body-center"
+        },
+        {
+            "title": "Initiative",
+            "data": "initiative",
+            //"width": "90px",
             "className":"dt-body-center"
         },
         {
@@ -86,9 +87,19 @@ function loadDataTable(){
             "className":"dt-body-center"
         },
         {
-            "title": "Ability", 
+            "title": "Pilot Ability", 
             "data": "ability",
             "defaultContent": ""
+        },
+        {
+            "title": "Ship Ability", 
+            "data": "shipAbility",
+            "defaultContent": ""
+        },
+        {
+            "title":"Actions",
+            "data": "actions",
+            "render":"[, ]"
         },
         {
             "title": "Slots",
@@ -130,8 +141,20 @@ function loadDataTable(){
             "data": "shields"
         },
         {
-            "title":"Actions",
-            "data": "actions"
+            "title":"Force",
+            "className":"dt-body-center",
+            "defaultContent": "",
+            "data": "force.value"
+        },
+        {
+            "title":"Charges",
+            "className":"dt-body-center",
+            "defaultContent": "",
+            "data": "charges.value"
+        },
+        {
+            "title":"Image",
+            "data": "image"
         }
     ];
 
@@ -175,8 +198,36 @@ function loadDataTable(){
             "defaultContent": ""
         },
         {
+            "title": "Attack Arc", 
+            "data": "attack_arc",
+            "defaultContent": ""
+        },
+        {
+            "title": "Attack Value", 
+            "data": "attack_value",
+            "className":"dt-body-center",
+            "defaultContent": ""
+        },
+        {
+            "title": "Attack Range", 
+            "data": "attack_range",
+            "className":"dt-body-center",
+            "defaultContent": ""
+        },
+        {
+            "title": "Is Ordnance", 
+            "data": "attack_ordnance",
+            "className":"dt-body-center",
+            "defaultContent": ""
+        },
+        {
             "title": "Add Actions", 
             "data": "actions",
+            "defaultContent": ""
+        },
+        {
+            "title": "Add Stats", 
+            "data": "add_stats",
             "defaultContent": ""
         },
         {
@@ -188,6 +239,11 @@ function loadDataTable(){
             "title": "Remove Slots", 
             "data": "remove_slots",
             "defaultContent": ""
+        },
+        {
+            "title": "Image", 
+            "data": "image",
+            "defaultContent": "" //broken image url for one record
         }
     ];
 
