@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.1"></a>
+## [0.7.1](https://github.com/davidhorm/xwing-datatables/compare/v0.7.0...v0.7.1) (2018-10-09)
+
+
+### Bug Fixes
+
+* added the rest of the optional xwing-data (e.g. configuration) ([d74eca2](https://github.com/davidhorm/xwing-datatables/commit/d74eca2))
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/davidhorm/xwing-datatables/compare/v0.6.4...v0.7.0) (2018-10-08)
 
