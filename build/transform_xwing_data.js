@@ -67,6 +67,7 @@ function createPilotShipJson() {
 				}
 
 				setForceAndCharges(mergedObj);
+				setImage(mergedObj);
 				
 				pilotsArray.push(mergedObj);
 			});
@@ -119,7 +120,7 @@ function getActionsArray(actions) {
         }
         
         if(action.hasOwnProperty("linked")){
-			value += ` > ${action.linked.type}`;
+			value += ` ▸ ${action.linked.type}`;
 			if(action.linked.difficulty === "Red"){
 				value += '!';
 			}
@@ -141,6 +142,16 @@ function setForceAndCharges(json) {
 	}
 	if(json.hasOwnProperty("charges") && json.charges.recovers === 1) {
 		json.charges.value += "^";
+	}
+}
+
+/**
+ * Convert image url to <a href="...">
+ * @param {*} json 
+ */
+function setImage(json) {
+	if(json.hasOwnProperty("image")) {
+		json["image"] = `<a href="${json.image}">image</a>`;
 	}
 }
 
@@ -177,6 +188,7 @@ function createUpgradesJson() {
 					setAddRemoveSlots(side);
 					setForceAndCharges(side);
 					setAttack(side);
+					setImage(side);
 
 					upgradesArray.push(side);
 				}

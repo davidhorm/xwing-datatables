@@ -93,19 +93,16 @@ function loadDataTable(){
         {
             "title": "Limited",
             "data": "limited",
-            //"width": "82px",
             "className":"dt-body-center"
         },
         {
             "title": "Initiative",
             "data": "initiative",
-            //"width": "90px",
             "className":"dt-body-center"
         },
         {
             "title": "Cost",
             "data": "cost",
-            //"width": "61px",
             "className":"dt-body-center"
         },
         {
@@ -163,13 +160,13 @@ function loadDataTable(){
             "data": "shields"
         },
         {
-            "title":"Force",
+            "title":"Force Capacity",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "force.value"
         },
         {
-            "title":"Charges",
+            "title":"Charge Limit",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "charges.value"
@@ -218,6 +215,18 @@ function loadDataTable(){
             "title": "Restrictions", 
             "data": "restrictions",
             "defaultContent": ""
+        },
+        {
+            "title":"Force Capacity",
+            "className":"dt-body-center",
+            "defaultContent": "",
+            "data": "force.value"
+        },
+        {
+            "title":"Charge Limit",
+            "className":"dt-body-center",
+            "defaultContent": "",
+            "data": "charges.value"
         },
         {
             "title": "Attack Arc", 
