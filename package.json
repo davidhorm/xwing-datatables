@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://davidhorm.github.io/xwing-datatables",
   "dependencies": {
+    "@material/button": "^0.40.1",
     "@material/tab-bar": "^0.40.0",
     "npm": "^6.4.1"
   },

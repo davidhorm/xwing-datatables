@@ -1,3 +1,8 @@
+function loadPage() {
+    setClickHandlers();
+    loadDataTable();
+}
+
 function setClickHandlers() {
     var tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
     tabBar.preventDefaultOnClick = true;
@@ -18,6 +23,37 @@ function setClickHandlers() {
 
 function loadDataTable(){
 
+    var buttonConfig = {
+        "dom": {
+            "button": {
+                //replace dt-button class added by datatable with mdc class name
+                "tag": "button",
+                "className": "mdc-button mdc-button--dense",
+                "active": "mdc-button--unelevated"
+            }
+        },
+        "buttons": [
+            {   //column visibility button
+                "extend": "colvis",  
+                "className": "mdc-button"   //add mdc button style
+            },
+            {   //export to excel button
+                "extend": "excel",          
+                "className": "mdc-button",  //add mdc button style
+                "title": null,  //remove header from first row of document
+                "exportOptions": {
+                    "format": {
+                        "header": function(data, columnId) {
+                            //remove filter text from column header
+                            var removeAt = data.indexOf("<div"); 
+                            return data.substr(0,removeAt);
+                        }
+                    }
+                }
+            }
+        ]
+    };
+
     function populateTable(tableId, dataPath, columnsConfig) {
         var table = $(tableId).DataTable({
             "ajax": dataPath,
@@ -27,21 +63,7 @@ function loadDataTable(){
 
             //enable excel export button
             "dom": "Bfrtip",
-            "buttons": [
-                "colvis",   //column visibility button
-                {
-                    "extend": "excel",  //export to excel button
-                    "title": null,
-                    "exportOptions": {
-                        "format": {
-                            "header": function(data, columnId) {
-                                var removeAt = data.indexOf("<div"); //remove filter text from header
-                                return data.substr(0,removeAt);
-                            }
-                        }
-                    }
-                }
-            ]
+            "buttons": buttonConfig
         });
 
         //when table is drawn the first time, then draw the column filters

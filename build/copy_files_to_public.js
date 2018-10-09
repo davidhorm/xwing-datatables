@@ -7,7 +7,7 @@ var path = require("path");
 console.log("\n *START COPY FILES TO PUBLIC* \n");
 
 //copy favicon.ico and ./submodules/excel-bootstrap-table-filter files
-mkdirp('./public/lib', function (err) {
+mkdirp('./public/lib/@material/button/dist', function (err) {
     if (err) {
         console.error(err);
     }
@@ -17,6 +17,9 @@ mkdirp('./public/lib', function (err) {
         
         fs.createReadStream('./submodules/excel-bootstrap-table-filter/dist/excel-bootstrap-table-filter-style.css')
         .pipe(fs.createWriteStream('./public/lib/excel-bootstrap-table-filter-style.css'));
+
+        fs.createReadStream('./node_modules/@material/button/dist/mdc.button.min.css')
+        .pipe(fs.createWriteStream('./public/lib/@material/button/dist/mdc.button.min.css'));
 
         fs.createReadStream('./src/favicon.ico')
         .pipe(fs.createWriteStream('./public/favicon.ico'));
