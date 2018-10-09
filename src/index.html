@@ -53,12 +53,24 @@
 								<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
 							</span>
 							<span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
+                        </button>
+                        
+                        <!-- Damage Deck tab -->
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+							<span class="mdc-tab__content">
+								<span class="mdc-tab__text-label">Damage Deck</span>
+							</span>
+							<span class="mdc-tab-indicator">
+								<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+							</span>
+							<span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
 						</button>
                     </div>
                 </div>
             </div>
         </div>
         
+        <!-- Pilots Panel -->
         <div id="pilotDiv">
             <table id="pilotTable">
                 <thead></thead>
@@ -66,8 +78,17 @@
             </table>
         </div>
 
-        <div id="upgradeDiv" style="display: none;">
-            <table id="upgradeTable" style="width:100%">
+        <!-- Upgrades Panel -->
+        <div id="upgradeDiv">
+            <table id="upgradeTable" style="width: 100%">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Damage Deck Panel -->
+        <div id="damageDeckDiv">
+            <table id="damageDeckTable" style="width: 100%">
                 <thead></thead>
                 <tbody></tbody>
             </table>

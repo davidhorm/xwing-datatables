@@ -14,6 +14,7 @@ mkdirp("./public/data", function (err) {
 		setConditionsJson();
 		createPilotShipJson();
 		createUpgradesJson();
+		createDamageDeckJson();
 		console.log("\n *END TRANSFORM * \n");
     }
 });
@@ -304,4 +305,20 @@ function setAttack(side) {
 
 		delete side.attack;
 	}
+}
+
+function createDamageDeckJson() {
+	var damageDeckFilePath = "./submodules/xwing-data2/data/damage-decks/core.json"
+	var content = fs.readFileSync(damageDeckFilePath);
+	var json = JSON.parse(content);
+
+	damageDeckArray = [];
+	json.cards.forEach(card => {
+		damageDeckArray.push(card);
+	});
+
+	var damageDeckData = {"data": damageDeckArray};
+	var damageDeckDataFilePath = "./public/data/damage-deck.json";
+	fs.writeFileSync(damageDeckDataFilePath, JSON.stringify(damageDeckData));
+	console.log(`\n *CREATED ${damageDeckDataFilePath} * \n`);
 }

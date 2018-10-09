@@ -1,6 +1,16 @@
+var tableDivs = ['#pilotDiv', '#upgradeDiv', '#damageDeckDiv'];
+
 function loadPage() {
+    hideAllTables();
+    $(tableDivs[0]).show(); //show first div by default
     setClickHandlers();
-    loadDataTable();
+    loadDataTables();
+}
+
+function hideAllTables() {
+    tableDivs.forEach(function(tableDiv) {
+        $(tableDiv).hide();
+    });
 }
 
 function setClickHandlers() {
@@ -9,20 +19,18 @@ function setClickHandlers() {
 
     tabBar.listen("MDCTabBar:activated", function(t) {
         var tabIndex = t.detail.index;
-        
-        if(tabIndex === 0) {
-            $('#upgradeDiv').hide();
-            $('#pilotDiv').show();
-        }
-        else if (tabIndex === 1) {
-            $('#pilotDiv').hide();
-            $('#upgradeDiv').show();
-        }
+        hideAllTables();
+        $(tableDivs[tabIndex]).show();
     });
 }
 
-function loadDataTable(){
+function loadDataTables() {
+    populatePilotTable();
+    populateUpgradeTable();
+    populateDamageDeckTable();
+}
 
+function populateTable(tableId, dataPath, columnsConfig) {
     var buttonConfig = {
         "dom": {
             "button": {
@@ -53,25 +61,25 @@ function loadDataTable(){
             }
         ]
     };
+    
+    var table = $(tableId).DataTable({
+        "ajax": dataPath,
+        "columns": columnsConfig,
+        "bSort": false, //disable sort because excelTableFilter plugin will handle it
+        "paging": false, //disable paging to show all data
 
-    function populateTable(tableId, dataPath, columnsConfig) {
-        var table = $(tableId).DataTable({
-            "ajax": dataPath,
-            "columns": columnsConfig,
-            "bSort": false, //disable sort because excelTableFilter plugin will handle it
-            "paging": false, //disable paging to show all data
+        //enable excel export button
+        "dom": "Bfrtip",
+        "buttons": buttonConfig
+    });
 
-            //enable excel export button
-            "dom": "Bfrtip",
-            "buttons": buttonConfig
-        });
+    //when table is drawn the first time, then draw the column filters
+    table.one( 'draw', function () {
+        $(tableId).excelTableFilter();
+    });
+}
 
-        //when table is drawn the first time, then draw the column filters
-        table.one( 'draw', function () {
-            $(tableId).excelTableFilter();
-        });
-    }
-
+function populatePilotTable() {
     var pilotColumnsConfig = [
         {
             "title": "Pilot Name", 
@@ -178,8 +186,9 @@ function loadDataTable(){
     ];
 
     populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
-    
+}
 
+function populateUpgradeTable() {
     var upgradeColumnsConfig = [
         {
             "title": "Name", 
@@ -279,4 +288,28 @@ function loadDataTable(){
     ];
 
     populateTable("#upgradeTable", "data/upgrades.json", upgradeColumnsConfig);
+}
+
+function populateDamageDeckTable() {
+    var damageDeckColumnsConfig = [
+        {
+            "title": "Title", 
+            "data": "title"
+        },
+        {
+            "title": "Amount", 
+            "data": "amount",
+            "className":"dt-body-center"
+        },
+        {
+            "title": "Type", 
+            "data": "type"
+        },
+        {
+            "title": "Text", 
+            "data": "text"
+        }
+    ];
+
+    populateTable("#damageDeckTable", "data/damage-deck.json", damageDeckColumnsConfig);
 }
