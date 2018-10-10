@@ -35,3 +35,7 @@ table.dataTable thead th, h1 {
 span.red {
     color: red;
 }
+
+table.dataTable tbody tr.even {
+    background-color: #f3e5f5;
+}
