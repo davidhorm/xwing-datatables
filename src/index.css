@@ -62,3 +62,12 @@ footer {
     border-width: 0;
     margin: 0;
 }
+
+#aboutDiv div {
+    font-family: 'Roboto', sans-serif;
+    width: 40em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}

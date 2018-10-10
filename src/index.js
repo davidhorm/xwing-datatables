@@ -2,7 +2,8 @@
 var tabDefinitions = [
     {"divId": "#pilotDiv", "tableObj": null},
     {"divId": "#upgradeDiv", "tableObj": null},
-    {"divId": "#damageDeckDiv", "tableObj": null}
+    {"divId": "#damageDeckDiv", "tableObj": null},
+    {"divId": "#aboutDiv", "tableObj": null}
 ];
 
 function loadPage() {
@@ -19,9 +20,7 @@ function hideAllTables() {
         $(tabDef.divId).hide();
 
         //hide fixed column
-        if(tabDefinitions[index].tableObj !== null) {
-            setFixedHeaderVisibility(tabDefinitions[index].tableObj, false);
-        }
+        setFixedHeaderVisibility(tabDefinitions[index].tableObj, false);
     });
 }
 
@@ -31,9 +30,11 @@ function hideAllTables() {
  * @param {boolean} isVisibile - TRUE will make the header visible
  */
 function setFixedHeaderVisibility(tableObj, isVisibile) {
-    var tableContainer = $(tableObj.table().container());
-    tableContainer.css( 'display', isVisibile ? 'block' : 'none');
-    tableObj.fixedHeader.adjust();
+    if(tableObj !== null) {
+        var tableContainer = $(tableObj.table().container());
+        tableContainer.css( 'display', isVisibile ? 'block' : 'none');
+        tableObj.fixedHeader.adjust();
+    }
 }
 
 /** When clicking on the tabs, hide everything. Then show specific div and fixed header. */
