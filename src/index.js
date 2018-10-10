@@ -1,18 +1,42 @@
-var tableDivs = ['#pilotDiv', '#upgradeDiv', '#damageDeckDiv'];
+/** Defines tab's divId to show/hide content, and tableObj to show/hide fixed header */
+var tabDefinitions = [
+    {"divId": "#pilotDiv", "tableObj": null},
+    {"divId": "#upgradeDiv", "tableObj": null},
+    {"divId": "#damageDeckDiv", "tableObj": null}
+];
 
 function loadPage() {
     hideAllTables();
-    $(tableDivs[0]).show(); //show first div by default
+    $(tabDefinitions[0].divId).show(); //show first div by default
     setClickHandlers();
     loadDataTables();
 }
 
+/** Iterate through all tabDefinitions and hide div. Also hide fixed header. */
 function hideAllTables() {
-    tableDivs.forEach(function(tableDiv) {
-        $(tableDiv).hide();
+    tabDefinitions.forEach(function(tabDef, index) {
+        //hide whole div
+        $(tabDef.divId).hide();
+
+        //hide fixed column
+        if(tabDefinitions[index].tableObj !== null) {
+            setFixedHeaderVisibility(tabDefinitions[index].tableObj, false);
+        }
     });
 }
 
+/**
+ * Show or Hide the table header. Since the headers are fixed, we need to change visibility based on what tab we're on.
+ * @param {DataTable} tableObj - DataTable object when setting $.DataTables
+ * @param {boolean} isVisibile - TRUE will make the header visible
+ */
+function setFixedHeaderVisibility(tableObj, isVisibile) {
+    var tableContainer = $(tableObj.table().container());
+    tableContainer.css( 'display', isVisibile ? 'block' : 'none');
+    tableObj.fixedHeader.adjust();
+}
+
+/** When clicking on the tabs, hide everything. Then show specific div and fixed header. */
 function setClickHandlers() {
     var tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
     tabBar.preventDefaultOnClick = true;
@@ -20,7 +44,8 @@ function setClickHandlers() {
     tabBar.listen("MDCTabBar:activated", function(t) {
         var tabIndex = t.detail.index;
         hideAllTables();
-        $(tableDivs[tabIndex]).show();
+        $(tabDefinitions[tabIndex].divId).show();
+        setFixedHeaderVisibility(tabDefinitions[tabIndex].tableObj, true);
     });
 }
 
@@ -30,6 +55,12 @@ function loadDataTables() {
     populateDamageDeckTable();
 }
 
+/**
+ * Populate the DataTable with common configuration settings.
+ * @param {string} tableId - id of the <table>. Needs to include #
+ * @param {string} dataPath - filepath of the json file to load into the DataTable
+ * @param {JSON} columnsConfig - {"columns"} configuration used by DataTables
+ */
 function populateTable(tableId, dataPath, columnsConfig) {
     var table = $(tableId).DataTable({
         "ajax": dataPath,
@@ -37,6 +68,7 @@ function populateTable(tableId, dataPath, columnsConfig) {
         "bSort": false, //disable sort because excelTableFilter plugin will handle it
         "paging": false, //disable paging to show all data
         "autoWidth": false, //set static width
+        "fixedHeader": true, //fix the header when scrolling
 
         //enable excel export button
         "dom": "Bfrtip",
@@ -47,8 +79,11 @@ function populateTable(tableId, dataPath, columnsConfig) {
     table.one( 'draw', function () {
         $(tableId).excelTableFilter();
     });
+
+    return table;
 }
 
+/** {"buttons"} configuration used by DataTables. Used to show Column Visibility and Excel buttons. */
 function getButtonsConfig() {
     var buttonsConfig = {
         "dom": {
@@ -201,7 +236,8 @@ function populatePilotTable() {
         }
     ];
 
-    populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
+    var tableObj = populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
+    tabDefinitions[0].tableObj = tableObj;
 }
 
 function populateUpgradeTable() {
@@ -309,7 +345,8 @@ function populateUpgradeTable() {
         }
     ];
 
-    populateTable("#upgradeTable", "data/upgrades.json", upgradeColumnsConfig);
+    var tableObj = populateTable("#upgradeTable", "data/upgrades.json", upgradeColumnsConfig);
+    tabDefinitions[1].tableObj = tableObj;
 }
 
 function populateDamageDeckTable() {
@@ -333,5 +370,6 @@ function populateDamageDeckTable() {
         }
     ];
 
-    populateTable("#damageDeckTable", "data/damage-deck.json", damageDeckColumnsConfig);
+    var tableObj = populateTable("#damageDeckTable", "data/damage-deck.json", damageDeckColumnsConfig);
+    tabDefinitions[2].tableObj = tableObj;
 }
