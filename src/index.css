@@ -2,11 +2,14 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+table.dataTable {
+    width: auto; /* undo the default 100% width so columns won't shrink */
+}
+
 table.dataTable thead th {
     font-family: 'Roboto', sans-serif;
     text-align: left;
-    padding: 10px 13px;
-    padding: 0;
+    padding: 8px 10px;
     white-space: nowrap;
 }
 
@@ -53,8 +56,8 @@ footer {
 .arrow-down {
     background: url("img/icons8-filter.png");
     background-repeat: no-repeat;
-    background-size: 1em;
-    padding: 0.5em;
+    background-size: 0.8em;
+    padding: 0.4em; /* make padding equal half background-size */
     transform: none;
     border-width: 0;
     margin: 0;

@@ -36,6 +36,7 @@ function populateTable(tableId, dataPath, columnsConfig) {
         "columns": columnsConfig,
         "bSort": false, //disable sort because excelTableFilter plugin will handle it
         "paging": false, //disable paging to show all data
+        "autoWidth": false, //set static width
 
         //enable excel export button
         "dom": "Bfrtip",
@@ -178,13 +179,13 @@ function populatePilotTable() {
             "data": "shields"
         },
         {
-            "title":"Force Capacity",
+            "title":"Force",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "force.value"
         },
         {
-            "title":"Charge Limit",
+            "title":"Charges",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "charges.value"
@@ -241,13 +242,13 @@ function populateUpgradeTable() {
             "defaultContent": ""
         },
         {
-            "title":"Force Capacity",
+            "title":"Force",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "force.value"
         },
         {
-            "title":"Charge Limit",
+            "title":"Charges",
             "className":"dt-body-center",
             "defaultContent": "",
             "data": "charges.value"
