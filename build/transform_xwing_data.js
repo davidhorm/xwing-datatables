@@ -295,26 +295,32 @@ function getRestrictions(restrictions) {
 		restrictions.forEach(restriction => {
 
 			if(restriction.hasOwnProperty("factions")) {
-				restrictionsArray = restrictionsArray.concat(restriction.factions);
-			}
-			else if(restriction.hasOwnProperty("names")) {
-				restrictionsArray = restrictionsArray.concat(restriction.names);
+				var value = restriction.factions;
+				
+				//some upgrades require Scum or Vader/Ezra
+				if(restriction.hasOwnProperty("names")) {
+					value = value.concat(restriction.names);
+				}
+
+				restrictionsArray.push(value.join(" or "));
 			}
 			else if(restriction.hasOwnProperty("sizes")) {
-				restrictionsArray = restrictionsArray.concat(restriction.sizes);
+				restrictionsArray.push(restriction.sizes.join(" or "));
 			}
 			else if(restriction.hasOwnProperty("arcs")) {
-				restrictionsArray = restrictionsArray.concat(restriction.arcs);
+				restrictionsArray.push(restriction.arcs.join(" or "));
 			}
 			else if(restriction.hasOwnProperty("ships")) {
+				var ships = [];
 				restriction.ships.forEach(ship_xws => {
-					restrictionsArray.push(shipsArray[ship_xws].name || ""); //add "" for preview content
+					ships.push(shipsArray[ship_xws].name || ""); //add "" for preview content
 				});
+				restrictionsArray.push(ships.join(" or "));
 			}
 			else if(restriction.hasOwnProperty("action")) {
 				var value = restriction.action.type;
 				if(restriction.action.difficulty === "Red") {
-					value += "!";
+					value = `<span class="red">${value}!</span>`;
 				}
 				restrictionsArray.push(value);
 			}
