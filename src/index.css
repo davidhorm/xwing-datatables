@@ -2,10 +2,12 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-table.dataTable thead th, h1 {
+table.dataTable thead th {
     font-family: 'Roboto', sans-serif;
     text-align: left;
     padding: 10px 13px;
+    padding: 0;
+    white-space: nowrap;
 }
 
 .dropdown-filter-content, tbody {
@@ -38,4 +40,22 @@ span.red {
 
 table.dataTable tbody tr.even {
     background-color: #f3e5f5;
+}
+
+footer {
+    padding-top: 1em;
+}
+
+.dropdown-filter-icon {
+    border-style: none;
+}
+
+.arrow-down {
+    background: url("img/icons8-filter.png");
+    background-repeat: no-repeat;
+    background-size: 1em;
+    padding: 0.5em;
+    transform: none;
+    border-width: 0;
+    margin: 0;
 }
