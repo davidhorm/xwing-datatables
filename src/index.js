@@ -86,6 +86,11 @@ function getButtonsConfig() {
 function populatePilotTable() {
     var pilotColumnsConfig = [
         {
+            "title": "Pilot", 
+            "data": "pilot_name_formatted",
+            "visible": false //hidden because not easily filterable, but user can display later
+        },
+        {
             "title": "Pilot Name", 
             "data": "pilot_name"
         },
@@ -95,17 +100,17 @@ function populatePilotTable() {
             "defaultContent": ""
         },
         {
+            "title": "Limited",
+            "data": "limited",
+            "className":"dt-body-center"
+        },
+        {
             "title": "Faction",
             "data": "faction"
         },
         {
             "title":"Ship Name",
             "data": "ship_name"
-        },
-        {
-            "title": "Limited",
-            "data": "limited",
-            "className":"dt-body-center"
         },
         {
             "title": "Initiative",
@@ -144,16 +149,17 @@ function populatePilotTable() {
         {
             "title":"Dial",
             "data": "dial",
-            "render":"[, ]"
+            "render":"[, ]",
+            "visible": false //hidden in browser, but shown in excel
+        },
+        {
+            "title":"Attack Arc",
+            "data": "attack_arc"
         },
         {
             "title":"Attack Value",
             "className":"dt-body-center",
             "data": "attack_value"
-        },
-        {
-            "title":"Attack Arc",
-            "data": "attack_arc"
         },
         {
             "title":"Agility",
@@ -190,7 +196,7 @@ function populatePilotTable() {
         {
             "title":"Image Url",
             "data": "image",
-            "visible": false //hidden in browser, but shown in excel
+            "visible": false //hidden, but will be shown in excel export
         }
     ];
 
@@ -264,7 +270,7 @@ function populateUpgradeTable() {
             "defaultContent": ""
         },
         {
-            "title": "Is Ordnance", 
+            "title": "Range Bonus", 
             "data": "attack_ordnance",
             "className":"dt-body-center",
             "defaultContent": ""

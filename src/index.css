@@ -31,3 +31,7 @@ table.dataTable thead th, h1 {
     padding: 0px 14px;
     border-width: 2px;
 }
+
+span.red {
+    color: red;
+}

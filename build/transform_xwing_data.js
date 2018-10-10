@@ -52,21 +52,17 @@ function createPilotShipJson() {
 			//store ship data on pilot
 			json.pilots.forEach(pilotObj => {
 				pilotObj["pilot_name"] = pilotObj.name; //assign to pilot_name so it doesn't conflict with name
+				pilotObj["pilot_name_formatted"] = getFormattedPilotName(pilotObj); //format pilot name with limited and caption
 				pilotObj["actions"] = getActionsArray(pilotObj.shipActions || shipOnlyActions); // some pilots have actions different than the ship (i.e. calculate)
 				var mergedObj = Object.assign(pilotObj, shipOnly);
 				delete mergedObj.name;
 
-				//append condition ability to pilot ability
-				if(mergedObj.hasOwnProperty("conditions") && mergedObj.conditions.length > 0) {
-					var condition = conditions[mergedObj.conditions[0]];
-					pilotObj.ability += `<div></div>${condition.name} - ${condition.ability}`;
-				}
-
-				//format shipAbility to be `${name} - ${text}`
+				//format shipAbility to be `${name}: ${text}`
 				if(mergedObj.hasOwnProperty("shipAbility")) {
-					mergedObj.shipAbility = `${mergedObj.shipAbility.name} - ${mergedObj.shipAbility.text}`
+					mergedObj.shipAbility = getFormattedTitledText(mergedObj.shipAbility.name, mergedObj.shipAbility.text);
 				}
 
+				setFormattedAbility(mergedObj);
 				setForceAndCharges(mergedObj);
 				setImageLink(mergedObj);
 				
@@ -112,18 +108,28 @@ function getModifiedShipJson(shipJson) {
 	return shipJson;
 }
 
+function getFormattedPilotName(pilotObj) {
+	var bullet = pilotObj.limited ? "•" : "";
+	var caption = pilotObj.hasOwnProperty("caption") ? `: <i>${pilotObj.caption}</i>` : "";
+	return `${bullet}${pilotObj.name}${caption}`;
+}
+
 function getActionsArray(actions) {
 	var actionsArray = [];
 	actions.forEach(action => {
 		var value = action.type;
         if(action.difficulty === "Red"){
-			value += '!';
-        }
+			value = `<span class="red">${action.type}!</span>`;
+		}
         
         if(action.hasOwnProperty("linked")){
-			value += ` ▸ ${action.linked.type}`;
+			value += ` ▸ `;
 			if(action.linked.difficulty === "Red"){
-				value += '!';
+				value += `<span class="red">${action.linked.type}!</span>`;
+			}
+			else
+			{
+				value += `${action.linked.type}`;
 			}
 		}
 
@@ -134,7 +140,41 @@ function getActionsArray(actions) {
 }
 
 /**
- * if force/charges can recover, then append ^
+ * Will bold keywords like Action:, Setup:, and Attack:
+ * Will append conditions if exists.
+ * @param {*} json 
+ */
+function setFormattedAbility(json) {
+	if(json.hasOwnProperty("ability")) {
+		json.ability = json.ability.replace(/Action:/g, "<b>Action:</b>");
+		json.ability = json.ability.replace("Setup:", "<b>Setup:</b>");
+		json.ability = json.ability.replace("Attack:", "<b>Attack:</b>");
+		json.ability = json.ability.replace("Attack ([Lock]):", "<b>Attack ([Lock]):</b>");
+		json.ability = json.ability.replace("Attack ([Focus]):", "<b>Attack ([Focus]):</b>");
+
+		if(json.ability === "Attack") {
+			//Dorsal Turret
+			json.ability = "<b>Attack</b>";
+		}
+	}
+
+	if(json.hasOwnProperty("conditions") && json.conditions.length > 0) {
+		var condition = conditions[json.conditions[0]];
+		json.ability = `<div>${json.ability}</div><hr></hr><div>${getFormattedTitledText(condition.name, condition.ability)}</div>`; 
+	}
+}
+
+/**
+ * Some abilities and conditions have titles with text. This formats it for displaying.
+ * @param {string} title 
+ * @param {text} text 
+ */
+function getFormattedTitledText(title, text) {
+	return `<b><i>${title}:</i></b> ${text}`;
+}
+
+/**
+ * if force/charges can recover, then append ▴
  * @param {*} json 
  */
 function setForceAndCharges(json) {
@@ -174,12 +214,7 @@ function createUpgradesJson() {
 						side.actions = actionsArray;
 					}
 
-					//append condition ability to upgrade ability
-					if(side.hasOwnProperty("conditions") && side.conditions.length > 0) {
-						var condition = conditions[side.conditions[0]];
-						side.ability += `<div></div>${condition.name} - ${condition.ability}`;
-					}
-					
+					setFormattedAbility(side);
 					setCost(side, upgrade.cost);
 					setAddStats(side);
 					setAddRemoveSlots(side);
@@ -225,7 +260,7 @@ function setAddStats(side) {
 	if(side.hasOwnProperty("grants")) {
 		side.grants.forEach(grant => {
 			if(grant.type === "stat") {
-				var value = `${capitalize(grant.value)} = ${grant.amount}`;
+				var value = `${capitalize(grant.value)} +${grant.amount}`;
 				statsArray.push(value);
 			}
 		});
