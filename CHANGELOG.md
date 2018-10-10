@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/davidhorm/xwing-datatables/compare/v0.9.0...v0.10.0) (2018-10-10)
+
+
+### Features
+
+* added About tab ([3810fd2](https://github.com/davidhorm/xwing-datatables/commit/3810fd2))
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/davidhorm/xwing-datatables/compare/v0.8.2...v0.9.0) (2018-10-10)
 
