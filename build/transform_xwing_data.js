@@ -101,10 +101,6 @@ function getModifiedShipJson(shipJson) {
 	delete shipJson.stats;
 	delete shipJson.pilots;
 
-	//now parse actions
-	//var actionsArray = getActionsArray(shipJson.actions);
-	//shipJson.actions = actionsArray;
-				
 	return shipJson;
 }
 
@@ -158,9 +154,10 @@ function setFormattedAbility(json) {
 		}
 	}
 
+	//invisible dash added because excel won't show <hr />, but will show in export
 	if(json.hasOwnProperty("conditions") && json.conditions.length > 0) {
 		var condition = conditions[json.conditions[0]];
-		json.ability = `<div>${json.ability}</div><hr></hr><div>${getFormattedTitledText(condition.name, condition.ability)}</div>`; 
+		json.ability = `<div>${json.ability}</div><hr /><span style="display:none;"> — </span><div>${getFormattedTitledText(condition.name, condition.ability)}</div>`; 
 	}
 }
 
