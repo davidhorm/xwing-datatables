@@ -26,6 +26,7 @@
     "gh-pages": "^2.0.1",
     "glob": "^7.1.3",
     "html-minifier": "^3.5.20",
+    "http-server": "^0.11.1",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
     "rimraf": "^2.6.2",
