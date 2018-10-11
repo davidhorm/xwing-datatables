@@ -1,7 +1,6 @@
 [submodule "submodules/xwing-data2"]
 	path = submodules/xwing-data2
-	url = https://github.com/davidhorm/xwing-data2
-	branch = xwing-datatables
+	url = https://github.com/davidhorm/xwing-data2/tree/xwing-datatables
 [submodule "submodules/excel-bootstrap-table-filter"]
 	path = submodules/excel-bootstrap-table-filter
 	url = https://github.com/chestercharles/excel-bootstrap-table-filter
