@@ -63,6 +63,7 @@ function loadDataTables() {
  * @param {JSON} columnsConfig - {"columns"} configuration used by DataTables
  */
 function populateTable(tableId, dataPath, columnsConfig) {
+    appendFooter(tableId, columnsConfig);
     var table = $(tableId).DataTable({
         "ajax": dataPath,
         "columns": columnsConfig,
@@ -73,13 +74,35 @@ function populateTable(tableId, dataPath, columnsConfig) {
 
         //enable excel export button
         "dom": "Bfrtip",
-        "buttons": getButtonsConfig()
+        "buttons": getButtonsConfig(),
+
+        //when table loaded draw filter
+        "initComplete": function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' );
+                });
+            });
+        }
     });
 
     //when table is drawn the first time, then draw the column filters
-    table.one( 'draw', function () {
-        $(tableId).excelTableFilter();
-    });
+    //table.one( 'draw', function () {
+    //    $(tableId).excelTableFilter();
+    //});
 
     return table;
 }
@@ -118,6 +141,21 @@ function getButtonsConfig() {
     };
 
     return buttonsConfig;
+}
+
+function appendFooter(tableId, columnsConfig) {
+    var emptyTh = "<th></th>";
+    var footerCells = "";
+
+    var visibleColumns = columnsConfig.filter(function (obj) { 
+        return obj.hasOwnProperty("visible") ? obj.visible : true; 
+    });
+
+    for(var i = 0; i < visibleColumns.length; i++) {
+        footerCells += emptyTh;
+    }
+
+    $(tableId).append("<tfoot><tr>" + footerCells + "</tr></tfoot>");
 }
 
 function populatePilotTable() {
