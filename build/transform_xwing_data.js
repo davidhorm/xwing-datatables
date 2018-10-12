@@ -47,7 +47,7 @@ function createPilotShipJson() {
 			var shipOnlyActions = shipOnly.actions;
 			delete shipOnly.actions;
 			shipOnly = getModifiedShipJson(shipOnly);
-			shipsArray[shipOnly.xws] = shipOnly;
+			shipsArray[shipOnly.xws] = shipOnly.name;
 			
 			//store ship data on pilot
 			json.pilots.forEach(pilotObj => {
@@ -137,10 +137,11 @@ function getActionsArray(actions) {
 
 /**
  * Will bold keywords like Action:, Setup:, and Attack:
- * Will append conditions if exists.
+ * Will append conditions and device effects if exists.
  * @param {*} json 
  */
 function setFormattedAbility(json) {
+	//Bold keywords like Action:, Setup:, and Attack:
 	if(json.hasOwnProperty("ability")) {
 		json.ability = json.ability.replace(/Action:/g, "<b>Action:</b>");
 		json.ability = json.ability.replace("Setup:", "<b>Setup:</b>");
@@ -154,10 +155,17 @@ function setFormattedAbility(json) {
 		}
 	}
 
-	//invisible dash added because excel won't show <hr />, but will show in export
+	//Append Conditions
 	if(json.hasOwnProperty("conditions") && json.conditions.length > 0) {
+		//invisible dash added because excel won't show <hr />, but will show in export
 		var condition = conditions[json.conditions[0]];
-		json.ability = `<div>${json.ability}</div><hr /><span style="display:none;"> — </span><div>${getFormattedTitledText(condition.name, condition.ability)}</div>`; 
+		json.ability = `<div>${json.ability}</div><hr /><span class="hidden"> — </span><div>${getFormattedTitledText(condition.name, condition.ability)}</div>`; 
+	}
+
+	//Append Device Effects
+	if(json.hasOwnProperty("device")) {
+		//invisible dash added because excel won't show <hr />, but will show in export
+		json.ability = `<div>${json.ability}</div><hr /><span class="hidden"> — </span><div>${getFormattedTitledText(json.device.name, json.device.effect)}</div>`; 
 	}
 }
 
@@ -313,7 +321,7 @@ function getRestrictions(restrictions) {
 			else if(restriction.hasOwnProperty("ships")) {
 				var ships = [];
 				restriction.ships.forEach(ship_xws => {
-					ships.push(shipsArray[ship_xws].name || ""); //add "" for preview content
+					ships.push(shipsArray[ship_xws]);
 				});
 				restrictionsArray.push(ships.join(" or "));
 			}

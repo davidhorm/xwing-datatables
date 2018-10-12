@@ -71,3 +71,7 @@ footer {
     margin-right: auto;
     margin-top: 2em;
 }
+
+span.hidden {
+    display: none;
+}
