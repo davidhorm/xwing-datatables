@@ -123,15 +123,16 @@ function getButtonsConfig() {
 //#region Create Column Dropdown Filters
 
 function appendFooter(tableId, columnsConfig) {
-    var emptyTh = "<td></td>";
+    var emptyTd = "<td></td>";
     var footerCells = "";
 
+    /*
     var visibleColumns = columnsConfig.filter(function (obj) { 
         return obj.hasOwnProperty("visible") ? obj.visible : true; 
     });
-
-    for(var i = 0; i < visibleColumns.length; i++) {
-        footerCells += emptyTh;
+*/
+    for(var i = 0; i < columnsConfig.length; i++) {
+        footerCells += emptyTd;
     }
 
     $(tableId + " > tfoot").append("<tr>" + footerCells + "</tr>");
@@ -144,7 +145,7 @@ function createDropdownFilter(dataTable) {
         var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.footer()) );
 
         getSearchBox(column).appendTo(dropdown);
-        getCheckboxes(column).appendTo(dropdown);
+        //getCheckboxes(column).appendTo(dropdown);
     });
 }
 
@@ -181,7 +182,13 @@ function getCheckboxes(column) {
 
     var headerText = $(column.header()).text();
     column.data().unique().sort().each( function ( d, j ) {
-        checkboxes.append('<input type="checkbox" checked="checked" name="'+headerText+'">'+d+'<br />'); //don't need value?
+        $('<input type="checkbox" checked="checked" name="'+headerText+'" value="'+d+'">'+d+'</input><br />')
+            .appendTo(checkboxes)
+            .on( 'change', function () {
+                var columnName = this.name;
+                var tableId = this.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+                var self = this;
+            });
     });
 
     return checkboxes;
