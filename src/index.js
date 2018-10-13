@@ -67,43 +67,20 @@ function populateTable(tableId, dataPath, columnsConfig) {
     var table = $(tableId).DataTable({
         "ajax": dataPath,
         "columns": columnsConfig,
-        "bSort": false, //disable sort because excelTableFilter plugin will handle it
-        "paging": false, //disable paging to show all data
         "autoWidth": false, //set static width
+        "paging": false, //disable paging to show all data
+        "processing": true, //show indicator when sorting/filtering takes a long time
         "fixedHeader": true, //fix the header when scrolling
-
+        
+        
         //enable excel export button
         "dom": "Bfrtip",
         "buttons": getButtonsConfig(),
 
         //when table loaded draw filter
-        "initComplete": function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' );
-                });
-            });
-        }
+        "initComplete": function () { createDropdownFilter(this); }
     });
-
-    //when table is drawn the first time, then draw the column filters
-    //table.one( 'draw', function () {
-    //    $(tableId).excelTableFilter();
-    //});
-
+    
     return table;
 }
 
@@ -143,8 +120,10 @@ function getButtonsConfig() {
     return buttonsConfig;
 }
 
+//#region Create Column Dropdown Filters
+
 function appendFooter(tableId, columnsConfig) {
-    var emptyTh = "<th></th>";
+    var emptyTh = "<td></td>";
     var footerCells = "";
 
     var visibleColumns = columnsConfig.filter(function (obj) { 
@@ -155,8 +134,62 @@ function appendFooter(tableId, columnsConfig) {
         footerCells += emptyTh;
     }
 
-    $(tableId).append("<tfoot><tr>" + footerCells + "</tr></tfoot>");
+    $(tableId + " > tfoot").append("<tr>" + footerCells + "</tr>");
 }
+
+function createDropdownFilter(dataTable) {
+    dataTable.api().columns().every( function () {
+        var column = this;
+
+        var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.footer()) );
+
+        getSearchBox(column).appendTo(dropdown);
+        getCheckboxes(column).appendTo(dropdown);
+    });
+}
+
+function getSearchBox(column) {
+    var headerText = $(column.header()).text();
+    var searchbox = $('<div class="searchbox"></div>');
+    var input = $('<input type="text" placeholder="Search '+headerText+'" />')
+        .appendTo(searchbox)
+        .on( 'keyup change', function () {
+            if ( column.search() !== this.value ) {
+                column
+                    .search( this.value )
+                    .draw();
+            }
+        });
+                    
+    return searchbox;
+}
+
+function getCheckboxes(column) {
+    var checkboxes = $('<div class="checkboxes"></div>');
+    /*
+    var select = $('<select><option value=""></option></select>')
+    .appendTo( dropdown )
+    .on( 'change', function () {
+        var val = $.fn.dataTable.util.escapeRegex(
+            $(this).val()
+        );
+
+        column
+            .search( val ? '^'+val+'$' : '', true, false )
+            .draw();
+    } );*/
+
+    var headerText = $(column.header()).text();
+    column.data().unique().sort().each( function ( d, j ) {
+        checkboxes.append('<input type="checkbox" checked="checked" name="'+headerText+'">'+d+'<br />'); //don't need value?
+    });
+
+    return checkboxes;
+}
+
+//#endregion Create Column Dropdown Filters
+
+//#region Populate DataTables
 
 function populatePilotTable() {
     var pilotColumnsConfig = [
@@ -412,3 +445,5 @@ function populateDamageDeckTable() {
     var tableObj = populateTable("#damageDeckTable", "data/damage-deck.json", damageDeckColumnsConfig);
     tabDefinitions[2].tableObj = tableObj;
 }
+
+//#endregion Populate DataTables
