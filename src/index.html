@@ -112,27 +112,24 @@
         <div id="aboutDiv" style="display:none;">
             <div>This site was created to support the players <a href="http://x-wing.com/">X-Wing Second Edition</a> miniature game by 
                 <a href="http://fantasyflightgames.com/">Fantasy Flight Games</a>. The data on this site is unofficial and is not affiliated with Fantasy Flight Games, 
-                Lucasfilm Ltd., or Disney. You may view current or log new issues regarding this site at <a href="https://github.com/davidhorm/xwing-datatables/issues">GitHub</a>.
+                Lucasfilm Ltd., or Disney. You may log issues or suggestion regarding this site at <a href="https://github.com/davidhorm/xwing-datatables/issues">GitHub</a>.
             </div>
 
-            <div>This site takes the text found on the cards of the game and puts them in a table format for easy searching and filtering. Some of the data has been combined
+            <div>This site takes the text found on the cards of the game and puts them in a table format for easy searching and filtering. The data comes from 
+                <a href="https://github.com/guidokessels/xwing-data2">xwing-data2</a> and has been kept as the text format for easier searching. All red actions have
+                been appended with "!" character (for instance <span class="red">Focus!</span> means it's a red Focus on the card). Some of the data has been combined
                 to reduce the number of overall columns. For instance, the Condition text is combined with the Pilot Ability (or Upgrade Ability). Ships with a front and rear
                 attack have been combined in the single column with a comma separating their attack arcs and values. Variable Cost is in a different column to keep the original 
                 Cost column width small.
             </div>
 
-            <div>The tables may be exported to Excel, however none of the html formatting will be exported. That is why all the red text has also been appended with ! so users
-                can search/filter for that in Excel... Well users can also search for red using ! on this site as well now that I think about it.  Some columns are hidden by 
-                default, but Excel will export all the columns. There is a hidden Pilot column that formats the Pilot Name, Caption, and Limited into a format similar to the 
-                card. The Dial column is the formatted to be used with <a href="http://xwvassal.info/dialgen/dialgen">http://xwvassal.info/dialgen/dialgen</a>.
+            <div>The tables may be exported to Excel, however none of the html formatting will be exported. Some columns are hidden by default, but Excel will export all 
+                the columns. There is a hidden Pilot column that formats the Pilot Name, Caption, and Limited into a format similar to the 
+                card. The Dial column is the formatted to be used with <a href="http://xwvassal.info/dialgen/dialgen">http://xwvassal.info/dialgen/dialgen</a>. Preview content 
+                has been filtered out from these tables.
             </div>
 
-            <div>The data comes from <a href="https://github.com/guidokessels/xwing-data2">xwing-data2</a>, however the preview content has been filtered out. The tables are 
-                build with <a href="https://datatables.net/">DataTables</a> along with 
-                <a href="https://github.com/chestercharles/excel-bootstrap-table-filter">excel-bootstrap-table-filter</a> plugin to create the Excel-like column filters. The plugin 
-                filter isn't native to DataTables, so you may see some wonkiness when trying to use the column filters along with the search box. I got the filter icon for
-                free from <a href="https://icons8.com/">icons8</a>.
-            </div>
+            <div>The search boxes on individual columns show up as sub-headers in Chrome, but not in Edge.</div>
         </div>
 
         <script type="text/javascript">
@@ -143,6 +140,6 @@
     </body>
     <footer>
         <div>This site is unofficial and is not affiliated with Fantasy Flight Games, Lucasfilm Ltd., or Disney.</div>
-        <div>App icon by <a href="https://icons8.com/">icons8</a>.</div>
+        <!-- <div>App icon by <a href="https://icons8.com/">icons8</a>.</div> -->
     </footer>
 </html>

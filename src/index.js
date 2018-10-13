@@ -126,11 +126,6 @@ function appendFooter(tableId, columnsConfig) {
     var emptyTd = "<td></td>";
     var footerCells = "";
 
-    /*
-    var visibleColumns = columnsConfig.filter(function (obj) { 
-        return obj.hasOwnProperty("visible") ? obj.visible : true; 
-    });
-*/
     for(var i = 0; i < columnsConfig.length; i++) {
         footerCells += emptyTd;
     }
@@ -164,10 +159,10 @@ function getSearchBox(column) {
                     
     return searchbox;
 }
-
+/*
 function getCheckboxes(column) {
     var checkboxes = $('<div class="checkboxes"></div>');
-    /*
+    
     var select = $('<select><option value=""></option></select>')
     .appendTo( dropdown )
     .on( 'change', function () {
@@ -178,7 +173,7 @@ function getCheckboxes(column) {
         column
             .search( val ? '^'+val+'$' : '', true, false )
             .draw();
-    } );*/
+    } );
 
     var headerText = $(column.header()).text();
     column.data().unique().sort().each( function ( d, j ) {
@@ -192,7 +187,7 @@ function getCheckboxes(column) {
     });
 
     return checkboxes;
-}
+}*/
 
 //#endregion Create Column Dropdown Filters
 
@@ -306,7 +301,8 @@ function populatePilotTable() {
         },
         {
             "title":"Image Link",
-            "data": "image_link"
+            "data": "image_link",
+            "orderable": false //disable because it just says image
         },
         {
             "title":"Image Url",
@@ -317,6 +313,9 @@ function populatePilotTable() {
 
     var tableObj = populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
     tabDefinitions[0].tableObj = tableObj;
+
+    //sort the first visible column
+    tableObj.column("0:visible").order("asc").draw();
 }
 
 function populateUpgradeTable() {
@@ -414,12 +413,11 @@ function populateUpgradeTable() {
         {
             "title":"Image Link",
             "data": "image_link",
-            "defaultContent": "" //broken image url for one record
+            "orderable": false //disable because it just says image
         },
         {
             "title":"Image Url",
             "data": "image",
-            "defaultContent": "", //broken image url for one record
             "visible": false //hidden in browser, but shown in excel
         }
     ];
