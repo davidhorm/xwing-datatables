@@ -5,26 +5,20 @@ https://davidhorm.github.io/xwing-datatables/ is my personal website to support 
 ## Technology
 * [xwing-data2](/guidokessels/xwing-data2) - repository containing game data
 * [DataTables](https://www.datatables.net/) - jQuery plugin for generating HTML Tables
-* [excel-bootstrap-table-filter](/chestercharles/excel-bootstrap-table-filter) - jQuery plugin to generate an Excel-flavored table column filters
-
-### Built With
-* [standard-version](/conventional-changelog/standard-version) - for automatic versioning and CHANGELOG generation
-* [HTMLMinifier](https://www.npmjs.com/package/html-minifier) - for minifying html
-* [rimraf](/isaacs/rimraf) & [mkdirp](/substack/node-mkdirp) - because recreating a directory is crazy difficult using npm
 
 ### Usage
 
-This project depends on other GitHub projects. You may need to update the submodules to get the latest data.
-```
-git submodule update --init --recursive
-```
+Get all of the dependancies: `npm install`
+
+Get the latest submodule, format the data, minifiy files, run http server at ./public: `npm run build`
 
 This project uses [Conventional Commits](https://conventionalcommits.org). That means commit messages should be prefixed with: `fix:` (patch version), `feat:` (minor version), or `BREAKING CHANGE:` (major version) for specific versioning. Commit messages may also be prefixed with: `docs:`, `style:`, `refactor:`, `perf:`, `test:`,  or others for non-versioning. Run the following to commit, update CHANGELOG.md, and push to GitHub:
 ```
 git commit -a -m "<type>: <message>"
-npm run release
-git push --follow-tags origin master
+npm run push
 ```
+
+Deploy all files from ./public to gh-pages branch: `npm run deploy`
 
 ## Badges
 
