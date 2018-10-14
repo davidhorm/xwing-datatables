@@ -124,12 +124,15 @@ function getButtonsConfig() {
 function createDropdownFilter(dataTable) {
     dataTable.api().columns().every( function () {
         var column = this;
+        var headerText = $(column.header()).text();
 
         var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.header()) );
 
-        getSortButtons(column).appendTo(dropdown);
-        getSearchBox(column).appendTo(dropdown);
-        //getCheckboxes(column).appendTo(dropdown);
+        if(headerText !== "Image Link"){
+            getSortButtons(column).appendTo(dropdown);
+            getSearchBox(column, headerText).appendTo(dropdown);
+            getCheckboxes(column, headerText).appendTo(dropdown);
+        }
     });
 }
 
@@ -151,10 +154,7 @@ function getSortButtons(column) {
     return sortDiv;
 }
 
-function getSearchBox(column) {
-    var headerHtml = $(column.header()).html();
-    var headerText = headerHtml.substr(0, headerHtml.indexOf("<")); //parse out dropdown <div>
-
+function getSearchBox(column, headerText) {
     var searchbox = $('<div class="searchbox"></div>');
     var input = $('<input type="text" placeholder="Search '+headerText+'" />')
         .appendTo(searchbox)
@@ -169,9 +169,9 @@ function getSearchBox(column) {
     return searchbox;
 }
 
-function getCheckboxes(column) {
+function getCheckboxes(column, headerText) {
     var checkboxes = $('<div class="checkboxes"></div>');
-    
+    /*
     var select = $('<select><option value=""></option></select>')
     .appendTo( dropdown )
     .on( 'change', function () {
@@ -182,10 +182,12 @@ function getCheckboxes(column) {
         column
             .search( val ? '^'+val+'$' : '', true, false )
             .draw();
-    } );
+    } );*/
 
-    var headerText = $(column.header()).text();
-    column.data().unique().sort().each( function ( d, j ) {
+    var columnData = getColumnData(column, headerText); //
+    
+    columnData.forEach( function ( d ) {
+        var val = d.toString().replace(/"/g, ''); //remove all quotes
         $('<input type="checkbox" checked="checked" name="'+headerText+'" value="'+d+'">'+d+'</input><br />')
             .appendTo(checkboxes)
             .on( 'change', function () {
@@ -196,6 +198,35 @@ function getCheckboxes(column) {
     });
 
     return checkboxes;
+}
+
+function getColumnData(column, headerText) {
+    var uniqueData = new Set();
+
+    var delimitedHeaders = ["Actions", "Slots"];
+
+    column.data().each(function(data) {
+        if(delimitedHeaders.indexOf(headerText) >= 0) {
+            for(var i = 0; i < data.length; i++) {
+                var value = data[i].replace('<span class="red">', '').replace('</span>', '');
+                uniqueData.add(value);
+            }
+        }
+        else {
+            uniqueData.add(data);
+        }
+    });
+
+    var sortedData = Array.from(uniqueData).sort(function(a,b) {
+        if(!isNaN(parseInt(a)) && !isNaN(parseInt(b))) { 
+            return parseInt(a) - parseInt(b);
+        }
+        else {
+            return a - b;
+        }
+    });
+
+    return sortedData;
 }
 
 //#endregion Create Column Dropdown Filters
