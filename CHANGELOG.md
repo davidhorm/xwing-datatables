@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/davidhorm/xwing-datatables/compare/v0.10.2...v0.11.0) (2018-10-14)
+
+
+### Features
+
+* added device effects text ([33c4b5f](https://github.com/davidhorm/xwing-datatables/commit/33c4b5f))
+* replaced excel filters with datatable dropdowns in footer ([2ee9a8f](https://github.com/davidhorm/xwing-datatables/commit/2ee9a8f))
+
+
+
 <a name="0.10.2"></a>
 ## [0.10.2](https://github.com/davidhorm/xwing-datatables/compare/v0.10.1...v0.10.2) (2018-10-11)
 

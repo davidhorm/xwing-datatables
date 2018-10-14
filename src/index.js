@@ -63,24 +63,24 @@ function loadDataTables() {
  * @param {JSON} columnsConfig - {"columns"} configuration used by DataTables
  */
 function populateTable(tableId, dataPath, columnsConfig) {
+    appendFooter(tableId, columnsConfig);
     var table = $(tableId).DataTable({
         "ajax": dataPath,
         "columns": columnsConfig,
-        "bSort": false, //disable sort because excelTableFilter plugin will handle it
-        "paging": false, //disable paging to show all data
         "autoWidth": false, //set static width
+        "paging": false, //disable paging to show all data
+        "processing": true, //show indicator when sorting/filtering takes a long time
         "fixedHeader": true, //fix the header when scrolling
-
+        
+        
         //enable excel export button
         "dom": "Bfrtip",
-        "buttons": getButtonsConfig()
-    });
+        "buttons": getButtonsConfig(),
 
-    //when table is drawn the first time, then draw the column filters
-    table.one( 'draw', function () {
-        $(tableId).excelTableFilter();
+        //when table loaded draw filter
+        "initComplete": function () { createDropdownFilter(this); }
     });
-
+    
     return table;
 }
 
@@ -119,6 +119,79 @@ function getButtonsConfig() {
 
     return buttonsConfig;
 }
+
+//#region Create Column Dropdown Filters
+
+function appendFooter(tableId, columnsConfig) {
+    var emptyTd = "<td></td>";
+    var footerCells = "";
+
+    for(var i = 0; i < columnsConfig.length; i++) {
+        footerCells += emptyTd;
+    }
+
+    $(tableId + " > tfoot").append("<tr>" + footerCells + "</tr>");
+}
+
+function createDropdownFilter(dataTable) {
+    dataTable.api().columns().every( function () {
+        var column = this;
+
+        var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.footer()) );
+
+        getSearchBox(column).appendTo(dropdown);
+        //getCheckboxes(column).appendTo(dropdown);
+    });
+}
+
+function getSearchBox(column) {
+    var headerText = $(column.header()).text();
+    var searchbox = $('<div class="searchbox"></div>');
+    var input = $('<input type="text" placeholder="Search '+headerText+'" />')
+        .appendTo(searchbox)
+        .on( 'keyup change', function () {
+            if ( column.search() !== this.value ) {
+                column
+                    .search( this.value )
+                    .draw();
+            }
+        });
+                    
+    return searchbox;
+}
+/*
+function getCheckboxes(column) {
+    var checkboxes = $('<div class="checkboxes"></div>');
+    
+    var select = $('<select><option value=""></option></select>')
+    .appendTo( dropdown )
+    .on( 'change', function () {
+        var val = $.fn.dataTable.util.escapeRegex(
+            $(this).val()
+        );
+
+        column
+            .search( val ? '^'+val+'$' : '', true, false )
+            .draw();
+    } );
+
+    var headerText = $(column.header()).text();
+    column.data().unique().sort().each( function ( d, j ) {
+        $('<input type="checkbox" checked="checked" name="'+headerText+'" value="'+d+'">'+d+'</input><br />')
+            .appendTo(checkboxes)
+            .on( 'change', function () {
+                var columnName = this.name;
+                var tableId = this.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+                var self = this;
+            });
+    });
+
+    return checkboxes;
+}*/
+
+//#endregion Create Column Dropdown Filters
+
+//#region Populate DataTables
 
 function populatePilotTable() {
     var pilotColumnsConfig = [
@@ -228,7 +301,8 @@ function populatePilotTable() {
         },
         {
             "title":"Image Link",
-            "data": "image_link"
+            "data": "image_link",
+            "orderable": false //disable because it just says image
         },
         {
             "title":"Image Url",
@@ -239,6 +313,9 @@ function populatePilotTable() {
 
     var tableObj = populateTable("#pilotTable", "data/pilots.json", pilotColumnsConfig);
     tabDefinitions[0].tableObj = tableObj;
+
+    //sort the first visible column
+    tableObj.column("0:visible").order("asc").draw();
 }
 
 function populateUpgradeTable() {
@@ -336,12 +413,11 @@ function populateUpgradeTable() {
         {
             "title":"Image Link",
             "data": "image_link",
-            "defaultContent": "" //broken image url for one record
+            "orderable": false //disable because it just says image
         },
         {
             "title":"Image Url",
             "data": "image",
-            "defaultContent": "", //broken image url for one record
             "visible": false //hidden in browser, but shown in excel
         }
     ];
@@ -374,3 +450,5 @@ function populateDamageDeckTable() {
     var tableObj = populateTable("#damageDeckTable", "data/damage-deck.json", damageDeckColumnsConfig);
     tabDefinitions[2].tableObj = tableObj;
 }
+
+//#endregion Populate DataTables

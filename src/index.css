@@ -13,6 +13,12 @@ table.dataTable thead th {
     white-space: nowrap;
 }
 
+/* display filter menus as sub-header */
+table.dataTable tfoot {
+    display: table-header-group;
+    vertical-align: top;
+}
+
 .dropdown-filter-content, tbody {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: normal;
@@ -37,8 +43,14 @@ table.dataTable thead th {
     border-width: 2px;
 }
 
+/* show stressed items as red */
 span.red {
     color: red;
+}
+
+/* hide dashes after <hr /> tags in text */
+span.hidden {
+    display: none;
 }
 
 table.dataTable tbody tr.even {
@@ -49,6 +61,7 @@ footer {
     padding-top: 1em;
 }
 
+/*
 .dropdown-filter-icon {
     border-style: none;
 }
@@ -57,11 +70,11 @@ footer {
     background: url("img/icons8-filter.png");
     background-repeat: no-repeat;
     background-size: 0.8em;
-    padding: 0.4em; /* make padding equal half background-size */
+    padding: 0.4em; /* make padding equal half background-size */ /*
     transform: none;
     border-width: 0;
     margin: 0;
-}
+}*/
 
 #aboutDiv div {
     font-family: 'Roboto', sans-serif;
@@ -72,6 +85,3 @@ footer {
     margin-top: 2em;
 }
 
-span.hidden {
-    display: none;
-}
