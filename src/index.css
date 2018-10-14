@@ -11,6 +11,17 @@ table.dataTable thead th {
     text-align: left;
     padding: 8px 10px;
     white-space: nowrap;
+    min-width: 150px;
+    position: relative;
+}
+
+/* disable pointer on header because sort is in dropdown */
+table.dataTable thead th.sorting_asc, table.dataTable thead th.sorting_desc {
+    cursor: text;
+}
+
+table.dataTable thead th div.sort {
+    cursor: pointer;
 }
 
 .dropdown, tbody {
@@ -20,9 +31,13 @@ table.dataTable thead th {
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
+    top: 36px;
+    left: 0;
     z-index: 1;
-    display: table-row-group;
+    background-color: #ECEFF1;
+    padding: 10px;
+    line-height: 1.5em;
 }
 
 .mdc-tab-bar {
