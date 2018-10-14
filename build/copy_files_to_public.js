@@ -33,12 +33,6 @@ mkdirp('./public/lib/@material/button/dist', function (err) {
         console.error(err);
     }
     else {
-        fs.createReadStream('./submodules/excel-bootstrap-table-filter/dist/excel-bootstrap-table-filter-bundle.min.js')
-        .pipe(fs.createWriteStream('./public/lib/excel-bootstrap-table-filter-bundle.min.js'));
-        
-        fs.createReadStream('./submodules/excel-bootstrap-table-filter/dist/excel-bootstrap-table-filter-style.css')
-        .pipe(fs.createWriteStream('./public/lib/excel-bootstrap-table-filter-style.css'));
-
         fs.createReadStream('./node_modules/@material/button/dist/mdc.button.min.css')
         .pipe(fs.createWriteStream('./public/lib/@material/button/dist/mdc.button.min.css'));
     }
