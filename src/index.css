@@ -13,16 +13,16 @@ table.dataTable thead th {
     white-space: nowrap;
 }
 
-/* display filter menus as sub-header */
-table.dataTable tfoot {
-    display: table-header-group;
-    vertical-align: top;
-}
-
-.dropdown-filter-content, tbody {
+.dropdown, tbody {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: normal;
     font-size: 11pt;
+}
+
+.dropdown {
+    position: relative;
+    z-index: 1;
+    display: table-row-group;
 }
 
 .mdc-tab-bar {
@@ -60,21 +60,6 @@ table.dataTable tbody tr.even {
 footer {
     padding-top: 1em;
 }
-
-/*
-.dropdown-filter-icon {
-    border-style: none;
-}
-
-.arrow-down {
-    background: url("img/icons8-filter.png");
-    background-repeat: no-repeat;
-    background-size: 0.8em;
-    padding: 0.4em; /* make padding equal half background-size */ /*
-    transform: none;
-    border-width: 0;
-    margin: 0;
-}*/
 
 #aboutDiv div {
     font-family: 'Roboto', sans-serif;
