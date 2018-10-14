@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.2"></a>
+## [0.11.2](https://github.com/davidhorm/xwing-datatables/compare/v0.11.1...v0.11.2) (2018-10-14)
+
+
+### Bug Fixes
+
+* removing excel-bootstrap-table-filter from build process ([fe4cd50](https://github.com/davidhorm/xwing-datatables/commit/fe4cd50))
+
+
+
 <a name="0.11.1"></a>
 ## [0.11.1](https://github.com/davidhorm/xwing-datatables/compare/v0.11.0...v0.11.1) (2018-10-14)
 
