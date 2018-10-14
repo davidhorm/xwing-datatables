@@ -208,16 +208,21 @@ function getColumnData(column, headerText) {
     column.data().each(function(data) {
         if(delimitedHeaders.indexOf(headerText) >= 0) {
             for(var i = 0; i < data.length; i++) {
-                var value = data[i].replace('<span class="red">', '').replace('</span>', '');
+                var value = $('<div>' + data[i] + '</div>').text();
                 uniqueData.add(value);
             }
         }
         else {
-            uniqueData.add(data);
+            var value = $('<div>' + data + '</div>').text();
+            uniqueData.add( value );
         }
     });
 
-    var sortedData = Array.from(uniqueData).sort(function(a,b) {
+    //initial sort
+    var sortedData = Array.from(uniqueData).sort();
+    
+    //then sort if it's a number
+    sortedData.sort(function(a,b) {
         if(!isNaN(parseInt(a)) && !isNaN(parseInt(b))) { 
             return parseInt(a) - parseInt(b);
         }
