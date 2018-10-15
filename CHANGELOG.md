@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/davidhorm/xwing-datatables/compare/v0.11.2...v0.12.0) (2018-10-15)
+
+
+### Bug Fixes
+
+* removed unused excel-bootstrap-table-filter plugin ref ([c79168e](https://github.com/davidhorm/xwing-datatables/commit/c79168e))
+* removed html formatting from header, fixed sort ([6ca2684](https://github.com/davidhorm/xwing-datatables/commit/6ca2684))
+
+
+### Features
+
+* enabled column reordering ([0995f8b](https://github.com/davidhorm/xwing-datatables/commit/0995f8b))
+* added (non-functional) checkboxes back in. parsing comma delimited values ([9530b71](https://github.com/davidhorm/xwing-datatables/commit/9530b71))
+
+
+
 <a name="0.11.2"></a>
 ## [0.11.2](https://github.com/davidhorm/xwing-datatables/compare/v0.11.1...v0.11.2) (2018-10-14)
 
