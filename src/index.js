@@ -63,7 +63,6 @@ function loadDataTables() {
  * @param {JSON} columnsConfig - {"columns"} configuration used by DataTables
  */
 function populateTable(tableId, dataPath, columnsConfig) {
-    appendFooter(tableId, columnsConfig);
     var table = $(tableId).DataTable({
         "ajax": dataPath,
         "columns": columnsConfig,
@@ -122,30 +121,40 @@ function getButtonsConfig() {
 
 //#region Create Column Dropdown Filters
 
-function appendFooter(tableId, columnsConfig) {
-    var emptyTd = "<td></td>";
-    var footerCells = "";
-
-    for(var i = 0; i < columnsConfig.length; i++) {
-        footerCells += emptyTd;
-    }
-
-    $(tableId + " > tfoot").append("<tr>" + footerCells + "</tr>");
-}
-
 function createDropdownFilter(dataTable) {
     dataTable.api().columns().every( function () {
         var column = this;
+        var headerText = $(column.header()).text();
 
-        var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.footer()) );
+        var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.header()) );
 
-        getSearchBox(column).appendTo(dropdown);
-        //getCheckboxes(column).appendTo(dropdown);
+        if(headerText !== "Image Link"){
+            getSortButtons(column).appendTo(dropdown);
+            getSearchBox(column, headerText).appendTo(dropdown);
+            getCheckboxes(column, headerText).appendTo(dropdown);
+        }
     });
 }
 
-function getSearchBox(column) {
-    var headerText = $(column.header()).text();
+function getSortButtons(column) {
+    var sortDiv = $('<div class="sort"></div>');
+
+    $('<div>A to Z</div>')
+        .appendTo(sortDiv)
+        .on('click', function() {
+            column.order('asc').draw();
+        });
+
+    $('<div>Z to A</div>')
+        .appendTo(sortDiv)
+        .on('click', function() {
+            column.order('desc').draw();
+        });
+
+    return sortDiv;
+}
+
+function getSearchBox(column, headerText) {
     var searchbox = $('<div class="searchbox"></div>');
     var input = $('<input type="text" placeholder="Search '+headerText+'" />')
         .appendTo(searchbox)
@@ -159,10 +168,10 @@ function getSearchBox(column) {
                     
     return searchbox;
 }
-/*
-function getCheckboxes(column) {
+
+function getCheckboxes(column, headerText) {
     var checkboxes = $('<div class="checkboxes"></div>');
-    
+    /*
     var select = $('<select><option value=""></option></select>')
     .appendTo( dropdown )
     .on( 'change', function () {
@@ -173,10 +182,12 @@ function getCheckboxes(column) {
         column
             .search( val ? '^'+val+'$' : '', true, false )
             .draw();
-    } );
+    } );*/
 
-    var headerText = $(column.header()).text();
-    column.data().unique().sort().each( function ( d, j ) {
+    var columnData = getColumnData(column, headerText); //
+    
+    columnData.forEach( function ( d ) {
+        var val = d.toString().replace(/"/g, ''); //remove all quotes
         $('<input type="checkbox" checked="checked" name="'+headerText+'" value="'+d+'">'+d+'</input><br />')
             .appendTo(checkboxes)
             .on( 'change', function () {
@@ -187,7 +198,41 @@ function getCheckboxes(column) {
     });
 
     return checkboxes;
-}*/
+}
+
+function getColumnData(column, headerText) {
+    var uniqueData = new Set();
+
+    var delimitedHeaders = ["Actions", "Slots"];
+
+    column.data().each(function(data) {
+        if(delimitedHeaders.indexOf(headerText) >= 0) {
+            for(var i = 0; i < data.length; i++) {
+                var value = $('<div>' + data[i] + '</div>').text();
+                uniqueData.add(value);
+            }
+        }
+        else {
+            var value = $('<div>' + data + '</div>').text();
+            uniqueData.add( value );
+        }
+    });
+
+    //initial sort
+    var sortedData = Array.from(uniqueData).sort();
+    
+    //then sort if it's a number
+    sortedData.sort(function(a,b) {
+        if(!isNaN(parseInt(a)) && !isNaN(parseInt(b))) { 
+            return parseInt(a) - parseInt(b);
+        }
+        else {
+            return a - b;
+        }
+    });
+
+    return sortedData;
+}
 
 //#endregion Create Column Dropdown Filters
 
@@ -211,102 +256,121 @@ function populatePilotTable() {
         {
             "title": "Pilot", 
             "data": "pilot_name_formatted",
+            "orderable": false, //disable sort on column to add dropdown filter
             "visible": false //hidden because not easily filterable, but user can display later
         },
         {
             "title": "Pilot Name", 
-            "data": "pilot_name"
+            "data": "pilot_name",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Caption",
             "data": "caption",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Limited",
             "data": "limited",
-            "className":"dt-body-center"
+            "className":"dt-body-center",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Cost",
             "data": "cost",
-            "className":"dt-body-center"
+            "className":"dt-body-center",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Pilot Ability", 
             "data": "ability",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Ship Ability", 
             "data": "shipAbility",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Actions",
             "data": "actions",
-            "render":"[, ]"
+            "render":"[, ]",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Slots",
             "data": "slots",
-            "render":"[, ]"
+            "render":"[, ]",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Size",
-            "data": "size"
+            "data": "size",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Dial",
             "data": "dial",
             "render":"[, ]",
+            "orderable": false, //disable sort on column to add dropdown filter
             "visible": false //hidden in browser, but shown in excel
         },
         {
             "title":"Attack Arc",
-            "data": "attack_arc"
+            "data": "attack_arc",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Attack Value",
             "className":"dt-body-center",
-            "data": "attack_value"
+            "data": "attack_value",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Agility",
             "className":"dt-body-center",
-            "data": "agility"
+            "data": "agility",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Hull",
             "className":"dt-body-center",
-            "data": "hull"
+            "data": "hull",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Shields",
             "className":"dt-body-center",
             "defaultContent": "",
-            "data": "shields"
+            "data": "shields",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Force",
             "className":"dt-body-center",
             "defaultContent": "",
-            "data": "force.value"
+            "data": "force.value",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Charges",
             "className":"dt-body-center",
             "defaultContent": "",
-            "data": "charges.value"
+            "data": "charges.value",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Image Link",
             "data": "image_link",
-            "orderable": false //disable because it just says image
+            "orderable": false //disable sort on column to add dropdown filter
         },
         {
             "title":"Image Url",
             "data": "image",
+            "orderable": false, //disable sort on column to add dropdown filter
             "visible": false //hidden, but will be shown in excel export
         }
     ];
@@ -322,93 +386,110 @@ function populateUpgradeTable() {
     var upgradeColumnsConfig = [
         {
             "title": "Name", 
-            "data": "title"
+            "data": "title",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Limited", 
             "data": "limited",
-            "className":"dt-body-center"
+            "className":"dt-body-center",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Slots", 
             "data": "slots",
-            "render": "[, ]"
+            "render": "[, ]",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Cost", 
             "data": "cost",
             "className":"dt-body-center",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Variable Cost", 
             "data": "variable_cost",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Ability", 
             "data": "ability",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Restrictions", 
             "data": "restrictions",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Force",
             "className":"dt-body-center",
             "defaultContent": "",
-            "data": "force.value"
+            "data": "force.value",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Charges",
             "className":"dt-body-center",
             "defaultContent": "",
-            "data": "charges.value"
+            "data": "charges.value",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Attack Arc", 
             "data": "attack_arc",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Attack Value", 
             "data": "attack_value",
             "className":"dt-body-center",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Attack Range", 
             "data": "attack_range",
             "className":"dt-body-center",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Range Bonus", 
             "data": "attack_ordnance",
             "className":"dt-body-center",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Add Actions", 
             "data": "actions",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Add Stats", 
             "data": "add_stats",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Add Slots", 
             "data": "add_slots",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Remove Slots", 
             "data": "remove_slots",
-            "defaultContent": ""
+            "defaultContent": "",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title":"Image Link",
@@ -418,6 +499,7 @@ function populateUpgradeTable() {
         {
             "title":"Image Url",
             "data": "image",
+            "orderable": false, //disable sort on column to add dropdown filter
             "visible": false //hidden in browser, but shown in excel
         }
     ];
@@ -430,20 +512,24 @@ function populateDamageDeckTable() {
     var damageDeckColumnsConfig = [
         {
             "title": "Title", 
-            "data": "title"
+            "data": "title",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Amount", 
             "data": "amount",
-            "className":"dt-body-center"
+            "className":"dt-body-center",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Type", 
-            "data": "type"
+            "data": "type",
+            "orderable": false, //disable sort on column to add dropdown filter
         },
         {
             "title": "Text", 
-            "data": "text"
+            "data": "text",
+            "orderable": false //disable sort on column to add dropdown filter
         }
     ];
 
