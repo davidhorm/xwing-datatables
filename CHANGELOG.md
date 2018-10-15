@@ -8,11 +8,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
+* removed unused excel-bootstrap-table-filter plugin ref ([c79168e](https://github.com/davidhorm/xwing-datatables/commit/c79168e))
 * removed html formatting from header, fixed sort ([6ca2684](https://github.com/davidhorm/xwing-datatables/commit/6ca2684))
 
 
 ### Features
 
+* enabled column reordering ([0995f8b](https://github.com/davidhorm/xwing-datatables/commit/0995f8b))
 * added (non-functional) checkboxes back in. parsing comma delimited values ([9530b71](https://github.com/davidhorm/xwing-datatables/commit/9530b71))
 
 
