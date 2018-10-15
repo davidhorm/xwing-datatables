@@ -20,7 +20,7 @@
     "minify": "npm run minify-js & npm run minify-css & npm run minify-html",
     "build": "npm run public-dir & npm run minify",
     "postbuild": "http-server",
-    "push": "standard-version && git push --follow-tags origin master",
+    "push": "standard-version && git push",
     "deploy": "gh-pages -d public"
   },
   "devDependencies": {

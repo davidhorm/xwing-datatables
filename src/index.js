@@ -196,6 +196,19 @@ function getCheckboxes(column) {
 function populatePilotTable() {
     var pilotColumnsConfig = [
         {
+            "title": "Faction",
+            "data": "faction"
+        },
+        {
+            "title":"Ship Name",
+            "data": "ship_name"
+        },
+        {
+            "title": "Initiative",
+            "data": "initiative",
+            "className":"dt-body-center"
+        },
+        {
             "title": "Pilot", 
             "data": "pilot_name_formatted",
             "visible": false //hidden because not easily filterable, but user can display later
@@ -212,19 +225,6 @@ function populatePilotTable() {
         {
             "title": "Limited",
             "data": "limited",
-            "className":"dt-body-center"
-        },
-        {
-            "title": "Faction",
-            "data": "faction"
-        },
-        {
-            "title":"Ship Name",
-            "data": "ship_name"
-        },
-        {
-            "title": "Initiative",
-            "data": "initiative",
             "className":"dt-body-center"
         },
         {
