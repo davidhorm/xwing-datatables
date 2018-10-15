@@ -126,12 +126,31 @@ function createDropdownFilter(dataTable) {
         var column = this;
         var headerText = $(column.header()).text();
 
-        var dropdown = $('<div class="dropdown"></div>').appendTo( $(column.header()) );
-
         if(headerText !== "Image Link"){
-            getSortButtons(column).appendTo(dropdown);
-            getSearchBox(column, headerText).appendTo(dropdown);
-            getCheckboxes(column, headerText).appendTo(dropdown);
+            var dropdownIcon = $('<img class="dropdownIcon" src="img/icons8-filter.png" />')
+                .appendTo( $(column.header()) )
+                .on('click', function() {
+                    $(this).parent().find("div.dropdown").toggle();
+                });
+            
+            var dropdownDiv = $('<div class="dropdown"></div>').appendTo( $(column.header()) );
+            getSortButtons(column).appendTo(dropdownDiv);
+            getSearchBox(column, headerText).appendTo(dropdownDiv);
+            getCheckboxes(column, headerText).appendTo(dropdownDiv);
+        }
+    });
+
+    hideDropdownOffclick();
+}
+
+/* if the target of the click isn't the dropdownDiv nor a descendant of the dropdownDiv */
+function hideDropdownOffclick() {
+    $(document).mouseup(function (e) {
+        var dropdownDiv = $(".dropdown");
+
+        if (!dropdownDiv.is(e.target) && dropdownDiv.has(e.target).length === 0) 
+        {
+            dropdownDiv.hide();
         }
     });
 }
@@ -242,16 +261,19 @@ function populatePilotTable() {
     var pilotColumnsConfig = [
         {
             "title": "Faction",
-            "data": "faction"
+            "data": "faction",
+            "orderable": false //use dropdown sort instead of column header
         },
         {
             "title":"Ship Name",
-            "data": "ship_name"
+            "data": "ship_name",
+            "orderable": false //use dropdown sort instead of column header
         },
         {
             "title": "Initiative",
             "data": "initiative",
-            "className":"dt-body-center"
+            "className":"dt-body-center",
+            "orderable": false //use dropdown sort instead of column header
         },
         {
             "title": "Pilot", 
