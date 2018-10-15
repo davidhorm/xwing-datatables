@@ -4,12 +4,8 @@
         
         <!-- DataTables w/ Excel, Column Visibility & Fixed Header extension -->
         <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/datatables.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/datatables.min.css"/>
-        
-        <!-- table filter plugin -->
-        <script type="text/javascript" src="lib\excel-bootstrap-table-filter-bundle.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="lib\excel-bootstrap-table-filter-style.css">
+        <script type="text/javascript" src="//cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/cr-1.5.0/fh-3.1.4/datatables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/cr-1.5.0/fh-3.1.4/datatables.min.css"/>
 
         <!-- MDC Tab Bars and Buttons -->
         <script type="text/javascript" src="lib/@material/tab-bar/dist/mdc.tabBar.min.js"></script>
@@ -115,12 +111,12 @@
                 Lucasfilm Ltd., or Disney. You may log issues or suggestion regarding this site at <a href="https://github.com/davidhorm/xwing-datatables/issues">GitHub</a>.
             </div>
 
-            <div>This site takes the text found on the cards of the game and puts them in a table format for easy searching and filtering. The data comes from 
-                <a href="https://github.com/guidokessels/xwing-data2">xwing-data2</a> and has been kept as the text format for easier searching. All red actions have
-                been appended with "!" character (for instance <span class="red">Focus!</span> means it's a red Focus on the card). Some of the data has been combined
-                to reduce the number of overall columns. For instance, the Condition text is combined with the Pilot Ability (or Upgrade Ability). Ships with a front and rear
-                attack have been combined in the single column with a comma separating their attack arcs and values. Variable Cost is in a different column to keep the original 
-                Cost column width small.
+            <div>This site takes the text found on the cards of the game and puts them in a table format for easy searching and filtering. Columns may be reordered by
+                clicking and dragging column headers. The data comes from <a href="https://github.com/guidokessels/xwing-data2">xwing-data2</a> and has been kept as the 
+                text format for easier searching. All red actions have been appended with "!" character (for instance <span class="red">Focus!</span> means it's a red 
+                Focus on the card). Some of the data has been combined to reduce the number of overall columns. For instance, the Condition text is combined with the Pilot 
+                Ability (or Upgrade Ability). Ships with a front and rear attack have been combined in the single column with a comma separating their attack arcs and 
+                values. Variable Cost is in a different column to keep the original Cost column width small.
             </div>
 
             <div>The tables may be exported to Excel, however none of the html formatting will be exported. Some columns are hidden by default, but Excel will export all 

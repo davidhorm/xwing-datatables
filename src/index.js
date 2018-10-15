@@ -71,7 +71,7 @@ function populateTable(tableId, dataPath, columnsConfig) {
         "paging": false, //disable paging to show all data
         "processing": true, //show indicator when sorting/filtering takes a long time
         "fixedHeader": true, //fix the header when scrolling
-        
+        "colReorder": true, //enable column reordering feature
         
         //enable excel export button
         "dom": "Bfrtip",
@@ -196,6 +196,19 @@ function getCheckboxes(column) {
 function populatePilotTable() {
     var pilotColumnsConfig = [
         {
+            "title": "Faction",
+            "data": "faction"
+        },
+        {
+            "title":"Ship Name",
+            "data": "ship_name"
+        },
+        {
+            "title": "Initiative",
+            "data": "initiative",
+            "className":"dt-body-center"
+        },
+        {
             "title": "Pilot", 
             "data": "pilot_name_formatted",
             "visible": false //hidden because not easily filterable, but user can display later
@@ -212,19 +225,6 @@ function populatePilotTable() {
         {
             "title": "Limited",
             "data": "limited",
-            "className":"dt-body-center"
-        },
-        {
-            "title": "Faction",
-            "data": "faction"
-        },
-        {
-            "title":"Ship Name",
-            "data": "ship_name"
-        },
-        {
-            "title": "Initiative",
-            "data": "initiative",
             "className":"dt-body-center"
         },
         {
