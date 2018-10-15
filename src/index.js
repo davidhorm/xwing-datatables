@@ -71,7 +71,7 @@ function populateTable(tableId, dataPath, columnsConfig) {
         "paging": false, //disable paging to show all data
         "processing": true, //show indicator when sorting/filtering takes a long time
         "fixedHeader": true, //fix the header when scrolling
-        
+        "colReorder": true, //enable column reordering
         
         //enable excel export button
         "dom": "Bfrtip",
