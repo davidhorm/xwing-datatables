@@ -15,7 +15,7 @@ mkdirp('./public/img', function (err) {
         fs.createReadStream('./src/favicon.ico')
         .pipe(fs.createWriteStream('./public/favicon.ico'));
 
-        var imageFiles = './src/img/*.png';
+        var imageFiles = './src/**/*.png';
         glob(imageFiles, null, function (err, files) {
             files.forEach(srcFile => {
                 var destFile = srcFile.replace("/src/", "/public/");
