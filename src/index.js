@@ -190,29 +190,23 @@ function getSearchBox(column, headerText) {
 
 function getCheckboxes(column, headerText) {
     var checkboxes = $('<div class="checkboxes"></div>');
-    /*
-    var select = $('<select><option value=""></option></select>')
-    .appendTo( dropdown )
-    .on( 'change', function () {
-        var val = $.fn.dataTable.util.escapeRegex(
-            $(this).val()
-        );
-
-        column
-            .search( val ? '^'+val+'$' : '', true, false )
-            .draw();
-    } );*/
-
-    var columnData = getColumnData(column, headerText); //
+    var columnData = getColumnData(column, headerText);
     
-    columnData.forEach( function ( d ) {
-        var val = d.toString().replace(/"/g, ''); //remove all quotes
-        $('<input type="checkbox" checked="checked" name="'+headerText+'" value="'+d+'">'+d+'</input><br />')
+    columnData.forEach( function ( currentValue, index ) {
+        var id = headerText.replace(/\s/g, '') + "-" + index; //remove all spaces and add number
+        $('<input type="checkbox" id="'+id+'" checked="checked" name="'+headerText+'" /><label for="'+id+'">'+currentValue+'</label><br />')
             .appendTo(checkboxes)
             .on( 'change', function () {
-                var columnName = this.name;
-                var tableId = this.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
-                var self = this;
+                //var columnName = this.name;
+                //var tableId = this.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+                var searchValues = [];
+                $(".checkboxes input:checked", this.parentElement.parentElement).each(function() {
+                    var checkedValue = $(this).next("label").text();
+                    searchValues.push(checkedValue);
+                });
+                
+                //TODO: replace .search() with .fnFilter()
+                column.search(searchValues.join(" ")).draw();
             });
     });
 
