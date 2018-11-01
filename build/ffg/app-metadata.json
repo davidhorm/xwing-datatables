@@ -63,18 +63,6 @@
     ],
     "ship_types": [
         {
-            "id": 1,
-            "name": "Modified YT-1300 Light Freighter",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Falcon.png"
-        },
-        {
-            "id": 3,
-            "name": "<italic>StarViper</italic>-class Attack Platform",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarViper.png"
-        },
-        {
             "id": 4,
             "name": "Scurrg H-6 bomber",
             "description": "",
@@ -97,6 +85,24 @@
             "name": "Kihraxz Fighter",
             "description": "",
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Kihraxz.png"
+        },
+        {
+            "id": 20,
+            "name": "TIE/ca Punisher",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEPunisher.png"
+        },
+        {
+            "id": 1,
+            "name": "Modified YT-1300 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Falcon.png"
+        },
+        {
+            "id": 3,
+            "name": "<italic>StarViper</italic>-class Attack Platform",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarViper.png"
         },
         {
             "id": 8,
@@ -171,10 +177,16 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEBomber.png"
         },
         {
-            "id": 20,
-            "name": "TIE/ca Punisher",
+            "id": 27,
+            "name": "TIE/ph Phantom",
             "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEPunisher.png"
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEPhantom.png"
+        },
+        {
+            "id": 28,
+            "name": "VT-49 Decimator",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Decimator.png"
         },
         {
             "id": 29,
@@ -207,6 +219,18 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_X-wing-T65.png"
         },
         {
+            "id": 45,
+            "name": "JumpMaster 5000",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Jumpmaster.png"
+        },
+        {
+            "id": 47,
+            "name": "Customized YT-1300 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_CustomizedYT-1300.png"
+        },
+        {
             "id": 22,
             "name": "G-1A Starfighter",
             "description": "",
@@ -229,18 +253,6 @@
             "name": "<italic>Lambda</italic>-class T-4a Shuttle",
             "description": "",
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Lambda.png"
-        },
-        {
-            "id": 27,
-            "name": "TIE/ph Phantom",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEPhantom.png"
-        },
-        {
-            "id": 28,
-            "name": "VT-49 Decimator",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Decimator.png"
         },
         {
             "id": 21,
@@ -267,12 +279,6 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_A-wing.png"
         },
         {
-            "id": 41,
-            "name": "TIE/in Interceptor",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEInterceptor.png"
-        },
-        {
             "id": 36,
             "name": "Fang Fighter",
             "description": "",
@@ -297,6 +303,12 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_E-wing.png"
         },
         {
+            "id": 41,
+            "name": "TIE/in Interceptor",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEInterceptor.png"
+        },
+        {
             "id": 42,
             "name": "<italic>Lancer</italic>-class Pursuit Craft",
             "description": "",
@@ -313,18 +325,6 @@
             "name": "M3-A Interceptor",
             "description": "",
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Scyk.png"
-        },
-        {
-            "id": 45,
-            "name": "JumpMaster 5000",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Jumpmaster.png"
-        },
-        {
-            "id": 47,
-            "name": "Customized YT-1300 Light Freighter",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_CustomizedYT-1300.png"
         },
         {
             "id": 48,
@@ -580,16 +580,10 @@
     ],
     "upgrade_types": [
         {
-            "id": 14,
-            "name": "Modification",
+            "id": 999,
+            "name": "Special",
             "description": "",
-            "font_icon": "0xF2059"
-        },
-        {
-            "id": 12,
-            "name": "Device",
-            "description": "",
-            "font_icon": "0xF2056"
+            "font_icon": "0xF2404"
         },
         {
             "id": 1,
@@ -640,10 +634,22 @@
             "font_icon": "0xF2054"
         },
         {
+            "id": 12,
+            "name": "Device",
+            "description": "",
+            "font_icon": "0xF2056"
+        },
+        {
             "id": 13,
             "name": "Illicit",
             "description": "",
             "font_icon": "0xF2058"
+        },
+        {
+            "id": 14,
+            "name": "Modification",
+            "description": "",
+            "font_icon": "0xF2059"
         },
         {
             "id": 15,
@@ -674,12 +680,6 @@
             "name": "Tech",
             "description": "",
             "font_icon": "0xF205B"
-        },
-        {
-            "id": 999,
-            "name": "Special",
-            "description": "",
-            "font_icon": "0xF2404"
         }
     ]
 }
