@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.14.0"></a>
+# [0.14.0](https://github.com/davidhorm/xwing-datatables/compare/v0.11.3...v0.14.0) (2018-11-01)
+
+
+### Features
+
+* added google analytics ([061b582](https://github.com/davidhorm/xwing-datatables/commit/061b582))
+* enabled column reorder ([0805f3d](https://github.com/davidhorm/xwing-datatables/commit/0805f3d))
+* updated with latest app metadata ([2e0eeb3](https://github.com/davidhorm/xwing-datatables/commit/2e0eeb3))
+
+
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/davidhorm/xwing-datatables/compare/v0.11.3...v0.13.0) (2018-10-28)
 
