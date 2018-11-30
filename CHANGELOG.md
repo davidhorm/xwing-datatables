@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/davidhorm/xwing-datatables/compare/v0.14.0...v0.15.0) (2018-11-30)
+
+
+### Features
+
+* updated to xwing-data2 1.2.0 latest version ([cce7ffe](https://github.com/davidhorm/xwing-datatables/commit/cce7ffe))
+
+
+
 <a name="0.14.0"></a>
 # [0.14.0](https://github.com/davidhorm/xwing-datatables/compare/v0.11.3...v0.14.0) (2018-11-01)
 
