@@ -11,7 +11,7 @@
   "scripts": {
     "diff": "git difftool --dir-diff -y",
     "remove-public-dir": "rimraf ./public",
-    "update-submodule": "git submodule update --init --recursive",
+    "update-submodule": "git submodule update --init --recursive --remote",
     "populate-public-dir": "node ./build/copy_files_to_public.js & node ./build/transform_xwing_data.js",
     "public-dir": "npm run update-submodule & npm run remove-public-dir && npm run populate-public-dir",
     "minify-js": "uglifyjs ./src/index.js -o ./public/index.js",
