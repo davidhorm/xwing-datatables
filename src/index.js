@@ -301,11 +301,13 @@ function populatePilotTable() {
         },
         {
             "title":"Image Link",
+            "defaultContent": "",
             "data": "image_link",
             "orderable": false //disable because it just says image
         },
         {
             "title":"Image Url",
+            "defaultContent": "",
             "data": "image",
             "visible": false //hidden, but will be shown in excel export
         }
