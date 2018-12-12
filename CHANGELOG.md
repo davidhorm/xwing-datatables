@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.16.0"></a>
+# [0.16.0](https://github.com/davidhorm/xwing-datatables/compare/v0.15.0...v0.16.0) (2018-12-12)
+
+
+### Bug Fixes
+
+* latest xwing data doesn't have images for all ships, so now making that column optional ([3052ca2](https://github.com/davidhorm/xwing-datatables/commit/3052ca2))
+
+
+### Features
+
+* updated official json with latest 1.1.0 ([a76ec87](https://github.com/davidhorm/xwing-datatables/commit/a76ec87))
+* updated to xwing-data2 1.3.3 ([e0214cc](https://github.com/davidhorm/xwing-datatables/commit/e0214cc))
+
+
+
 <a name="0.15.0"></a>
 # [0.15.0](https://github.com/davidhorm/xwing-datatables/compare/v0.14.0...v0.15.0) (2018-11-30)
 
