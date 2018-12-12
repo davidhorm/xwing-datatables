@@ -63,6 +63,18 @@
     ],
     "ship_types": [
         {
+            "id": 1,
+            "name": "Modified YT-1300 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Falcon.png"
+        },
+        {
+            "id": 3,
+            "name": "<italic>StarViper</italic>-class Attack Platform",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarViper.png"
+        },
+        {
             "id": 4,
             "name": "Scurrg H-6 bomber",
             "description": "",
@@ -87,22 +99,46 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Kihraxz.png"
         },
         {
+            "id": 19,
+            "name": "TIE/sa Bomber",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEBomber.png"
+        },
+        {
             "id": 20,
             "name": "TIE/ca Punisher",
             "description": "",
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEPunisher.png"
         },
         {
-            "id": 1,
-            "name": "Modified YT-1300 Light Freighter",
+            "id": 47,
+            "name": "Customized YT-1300 Light Freighter",
             "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Falcon.png"
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_CustomizedYT-1300.png"
         },
         {
-            "id": 3,
-            "name": "<italic>StarViper</italic>-class Attack Platform",
+            "id": 50,
+            "name": "TIE/sf Fighter",
             "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarViper.png"
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEsf.png"
+        },
+        {
+            "id": 52,
+            "name": "TIE/vn Silencer",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIESilencer.png"
+        },
+        {
+            "id": 53,
+            "name": "T-70 X-wing",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_X-wing-T70.png"
+        },
+        {
+            "id": 55,
+            "name": "MG-100 StarFortress",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarFortress.png"
         },
         {
             "id": 8,
@@ -171,10 +207,34 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEDefender.png"
         },
         {
-            "id": 19,
-            "name": "TIE/sa Bomber",
+            "id": 54,
+            "name": "RZ-2 A-wing",
             "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEBomber.png"
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_RZ-2_A-wing.png"
+        },
+        {
+            "id": 22,
+            "name": "G-1A Starfighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_MistHunter.png"
+        },
+        {
+            "id": 23,
+            "name": "VCX-100 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Ghost.png"
+        },
+        {
+            "id": 24,
+            "name": "YV-666 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_YV-666.png"
+        },
+        {
+            "id": 26,
+            "name": "<italic>Lambda</italic>-class T-4a Shuttle",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Lambda.png"
         },
         {
             "id": 27,
@@ -225,34 +285,10 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Jumpmaster.png"
         },
         {
-            "id": 47,
-            "name": "Customized YT-1300 Light Freighter",
+            "id": 51,
+            "name": "<italic>Upsilon</italic>-class Shuttle",
             "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_CustomizedYT-1300.png"
-        },
-        {
-            "id": 22,
-            "name": "G-1A Starfighter",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_MistHunter.png"
-        },
-        {
-            "id": 23,
-            "name": "VCX-100 Light Freighter",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Ghost.png"
-        },
-        {
-            "id": 24,
-            "name": "YV-666 Light Freighter",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_YV-666.png"
-        },
-        {
-            "id": 26,
-            "name": "<italic>Lambda</italic>-class T-4a Shuttle",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Lambda.png"
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_UpsilonShuttle.png"
         },
         {
             "id": 21,
@@ -331,6 +367,24 @@
             "name": "Escape Craft",
             "description": "",
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_EscapeShuttle.png"
+        },
+        {
+            "id": 49,
+            "name": "TIE/fo Fighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEfo.png"
+        },
+        {
+            "id": 56,
+            "name": "Modified TIE/ln Fighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_MiningGuild_TIE.png"
+        },
+        {
+            "id": 57,
+            "name": "Scavenged YT-1300 Light Freighter",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_Falcon_Resistance.png"
         }
     ],
     "card_stats": [
@@ -468,6 +522,16 @@
     ],
     "factions": [
         {
+            "id": 4,
+            "name": "Resistance",
+            "description": "The Resistance is the only line of defense against the rising tide of the nefarious First Order. Like the Alliance to Restore the Republic before them, the pilots of the Resistance often find themselves outnumbered and outgunned. Fortunately, the Resistance has some of the most advanced starfighters from the entire <italic>Star Wars</italic> saga at their disposal. With the Resistance Conversion Kit, your First Edition versions of these ships can be added to your <italic>X-Wing Second Edition</italic> squadrons right away.",
+            "icon": "https://sb-cdn.fantasyflightgames.com/factions/ResistanceIcon.png",
+            "banner_mobile": "https://sb-cdn.fantasyflightgames.com/factions/banners/mobile/ResistanceBannerMobile.png",
+            "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/ResistanceBannerWeb.png",
+            "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/ResistanceShipArt.png",
+            "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/ResistanceShipArtMobile.png"
+        },
+        {
             "id": 1,
             "name": "Rebel Alliance",
             "description": "Whether they're flying against a massive battlestation like the Death Star or facing wave after wave of TIE fighters, the pilots of the Rebel Alliance are no strangers to long odds. Despite this, the brave band of smugglers, pilots, soldiers, and spies continues to strike out against the tyranny of the Galactic Empire whenever and wherever they can. When you fight for the Rebellion in <italic>X-Wing Second Edition</italic>, you’re fighting for freedom across the galaxy—while flying some of the saga’s most iconic ships.",
@@ -496,6 +560,16 @@
             "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/Scum.png",
             "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/ScumFactionPageImage.png",
             "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/ScumFactionPageImage.png"
+        },
+        {
+            "id": 5,
+            "name": "First Order",
+            "description": "As you might expect from the successor to the Galactic Empire, the First Order fields a variety of starfighters based on classic Imperial designs. Far from simply rehashing these older ships, though, First Order fighters feature a number of refinements that give them the edge in their fight against the loathsome Resistance.",
+            "icon": "https://sb-cdn.fantasyflightgames.com/factions/FirstOrderIcon.png",
+            "banner_mobile": "https://sb-cdn.fantasyflightgames.com/factions/banners/mobile/FirstOrderBannerMobile.png",
+            "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/FirstOrderBannerWeb.png",
+            "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/FirstOrderShipArt.png",
+            "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/FirstOrderShipArtMobile.png"
         }
     ],
     "card_action_types": [
@@ -579,12 +653,6 @@
         }
     ],
     "upgrade_types": [
-        {
-            "id": 999,
-            "name": "Special",
-            "description": "",
-            "font_icon": "0xF2404"
-        },
         {
             "id": 1,
             "name": "Talent",
@@ -680,6 +748,12 @@
             "name": "Tech",
             "description": "",
             "font_icon": "0xF205B"
+        },
+        {
+            "id": 999,
+            "name": "Special",
+            "description": "",
+            "font_icon": "0xF2404"
         }
     ]
 }
