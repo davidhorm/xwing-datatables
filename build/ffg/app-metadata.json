@@ -135,12 +135,6 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_X-wing-T70.png"
         },
         {
-            "id": 55,
-            "name": "MG-100 StarFortress",
-            "description": "",
-            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarFortress.png"
-        },
-        {
             "id": 8,
             "name": "<italic>Sheathipede</italic>-class Shuttle",
             "description": "",
@@ -375,6 +369,12 @@
             "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_TIEfo.png"
         },
         {
+            "id": 55,
+            "name": "MG-100 StarFortress",
+            "description": "",
+            "icon": "https://sb-cdn.fantasyflightgames.com/ship_types/I_StarFortress.png"
+        },
+        {
             "id": 56,
             "name": "Modified TIE/ln Fighter",
             "description": "",
@@ -522,6 +522,16 @@
     ],
     "factions": [
         {
+            "id": 2,
+            "name": "Galactic Empire",
+            "description": "At the height of its power, the Imperial Navy deployed a wide range of ships and exceptional pilots in its effort to bring order to the galaxy and crush the Rebellion. Commanding the resources and manpower of countless star systems, the Empire will spare no expense to ensure it reigns supreme. Whether you’re flying mass-produced TIEs, powerful and lumbering shuttles, or more experimental starfighters, the Galactic Empire in <italic>X-Wing Second Edition</italic> invites you to hold the galaxy in your fist.",
+            "icon": "https://sb-cdn.fantasyflightgames.com/factions/Imperial.png",
+            "banner_mobile": "https://sb-cdn.fantasyflightgames.com/factions/banners/mobile/Imperial.png",
+            "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/Imperial.png",
+            "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/ImperialFactionPageImage.png",
+            "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/ImperialFactionPageImage.png"
+        },
+        {
             "id": 4,
             "name": "Resistance",
             "description": "The Resistance is the only line of defense against the rising tide of the nefarious First Order. Like the Alliance to Restore the Republic before them, the pilots of the Resistance often find themselves outnumbered and outgunned. Fortunately, the Resistance has some of the most advanced starfighters from the entire <italic>Star Wars</italic> saga at their disposal. With the Resistance Conversion Kit, your First Edition versions of these ships can be added to your <italic>X-Wing Second Edition</italic> squadrons right away.",
@@ -540,16 +550,6 @@
             "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/Rebel.png",
             "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/RebelFactionPageImage.png",
             "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/RebelFactionPageImage.png"
-        },
-        {
-            "id": 2,
-            "name": "Galactic Empire",
-            "description": "At the height of its power, the Imperial Navy deployed a wide range of ships and exceptional pilots in its effort to bring order to the galaxy and crush the Rebellion. Commanding the resources and manpower of countless star systems, the Empire will spare no expense to ensure it reigns supreme. Whether you’re flying mass-produced TIEs, powerful and lumbering shuttles, or more experimental starfighters, the Galactic Empire in <italic>X-Wing Second Edition</italic> invites you to hold the galaxy in your fist.",
-            "icon": "https://sb-cdn.fantasyflightgames.com/factions/Imperial.png",
-            "banner_mobile": "https://sb-cdn.fantasyflightgames.com/factions/banners/mobile/Imperial.png",
-            "banner": "https://sb-cdn.fantasyflightgames.com/factions/banners/web/Imperial.png",
-            "ship_art": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/web/ImperialFactionPageImage.png",
-            "ship_art_mobile": "https://sb-cdn.fantasyflightgames.com/factions/ship_arts/mobile/ImperialFactionPageImage.png"
         },
         {
             "id": 3,
@@ -654,6 +654,12 @@
     ],
     "upgrade_types": [
         {
+            "id": 8,
+            "name": "Crew",
+            "description": "",
+            "font_icon": "0xF2052"
+        },
+        {
             "id": 1,
             "name": "Talent",
             "description": "",
@@ -688,12 +694,6 @@
             "name": "Missile",
             "description": "",
             "font_icon": "0xF2050"
-        },
-        {
-            "id": 8,
-            "name": "Crew",
-            "description": "",
-            "font_icon": "0xF2052"
         },
         {
             "id": 10,
