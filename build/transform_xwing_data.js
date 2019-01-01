@@ -218,7 +218,7 @@ function createUpgradesJson() {
 						var actionsArray = getActionsArray(side.actions);
 						side.actions = actionsArray;
 					}
-
+					
 					setFormattedAbility(side);
 					setCost(side, upgrade.cost);
 					setAddStats(side);
