@@ -1,0 +1,137 @@
+{
+    "extensions": [
+        {
+            "id": 1,
+            "name": "Core Set",
+            "description": "The <italic>X-Wing Second Edition Core Set</italic> contains two TIE/ln fighter miniatures and one T-65 X-wing miniature, along with all of the maneuver templates, dials, cards, dice, and rules that you need to play the game.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ01_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/x-wing-second-edition/"
+        },
+        {
+            "id": 2,
+            "name": "Saw’s Renegades",
+            "description": "With the <italic>Saw’s Renegades Expansion Pack</italic> you’ll find two new ship miniatures—a U-wing and a T-65 X-wing, both pre-painted in the stunning black-and-white paint scheme of Saw Gerrera’s freedom fighters.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ02_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/saws-renegades-expansion-pack/"
+        },
+        {
+            "id": 3,
+            "name": "TIE Reaper",
+            "description": "The <italic>TIE Reaper Expansion Pack</italic> for X-wing Second Edition includes a menacing miniature to add to your Imperial squadron and also includes  the ship and upgrade cards you need to fly this high-performance troop transport.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ03_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/tie-reaper-expansion-pack/"
+        },
+        {
+            "id": 4,
+            "name": "Rebel Alliance Conversion Kit",
+            "description": "The <italic>Rebel Alliance Conversion Kit</italic> for X-Wing Second Edition offers the cards, tokens, dials, and bases that you need to convert your first edition collection of Rebel Alliance ships to the game's second edition.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ06_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/rebel-alliance-conversion-kit/"
+        },
+        {
+            "id": 5,
+            "name": "Galactic Empire Conversion Kit",
+            "description": "The <italic>Galactic Empire Conversion Kit</italic> for X-Wing Second Edition offers the cards, tokens, dials, and bases that you need to convert your first edition collection of Galactic Empire ships to the game's second edition.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ07_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/galactic-empire-conversion-kit/"
+        },
+        {
+            "id": 6,
+            "name": "Scum and Villainy Conversion Kit",
+            "description": "The <italic>Scum and Villainy Conversion Kit</italic> for X-Wing Second Edition offers the cards, tokens, dials, and bases that you need to convert your first edition collection of Scum ships to the game's second edition.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ08_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/scum-and-villainy-conversion-kit/"
+        },
+        {
+            "id": 7,
+            "name": "T-65 X-wing",
+            "description": "The <italic>T-65 X-Wing Expansion Pack</italic> for X-Wing Second Edition includes a beautifully-painted T-65 X-wing miniature for you to add to your squadron, a maneuver dial, and all the ship and upgrade cards you need to fly this iconic starfighter into battle.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ12_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/t-65-x-wing-expansion-pack/"
+        },
+        {
+            "id": 8,
+            "name": "BTL-A4 Y-wing",
+            "description": "The <italic>BTL-A4 Y-Wing Expansion Pack</italic> includes a beautifully pre-painted miniature and all the ship and upgrade cards you need to incorporate this powerful ship into your Rebel squadron.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ13_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/btl-a4-y-wing-expansion-pack/"
+        },
+        {
+            "id": 9,
+            "name": "TIE/ln fighter",
+            "description": "The <italic>TIE/ln Fighter Expansion Pack</italic> includes one beautifully pre-painted miniature and all the ship and upgrade cards you need to incorporate this flying terror into your Imperial squadron.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ14_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/tieln-fighter-expansion-pack/"
+        },
+        {
+            "id": 10,
+            "name": "TIE Advanced x1",
+            "description": "The <italic>TIE Advanced x1 Expansion Pack</italic> for X-Wing Second Edition includes a single new TIE Advanced x1 miniature for you to add to your squadron, along with a full complement of pilot cards to choose from.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ15_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/tie-advanced-x1-expansion-pack/"
+        },
+        {
+            "id": 11,
+            "name": "<italic>Slave I</italic>",
+            "description": "The <italic>Slave I Expansion Pack</italic> includes a beautifully pre-painted ship miniature along with a maneuver dial and all the ship cards and upgrade cards you need to supplement your squadron with this versatile ship.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ16_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/x-wing-second-edition-slave-i-expansion-pack/"
+        },
+        {
+            "id": 12,
+            "name": "Fang Fighter",
+            "description": "The <italic>Fang Fighter Expansion Pack</italic> includes a fully pre-painted Fang Fighter miniature, a maneuver dial, and all the ship cards, upgrade cards, and tokens you need to add one of these deadly starfighters to your squadron.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ17_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/fang-fighter-expansion-pack/"
+        },
+        {
+            "id": 13,
+            "name": "Lando’s <italic>Millennium Falcon</italic>",
+            "description": "",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ04_small.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/landos-millennium-falcon-expansion-pack/"
+        },
+        {
+            "id": 14,
+            "name": "First Order Conversion Kit",
+            "description": "The <italic>First Order</italic> for X-Wing Second Edition offers the cards, tokens, dials, and bases that you need to convert your first edition collection of First Order ships to the game's second edition.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ18_FirstOrderConversionKit.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/first-order-conversion-kit/"
+        },
+        {
+            "id": 15,
+            "name": "Resistance Conversion Kit",
+            "description": "The <italic>Resistance Conversion Kit</italic> for X-Wing Second Edition offers the cards, tokens, dials, and bases that you need to convert your first edition collection of Resiatance ships to the game's second edition.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ19_ResistanceConversionKit.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/resistance-conversion-kit/"
+        },
+        {
+            "id": 16,
+            "name": "RZ-2 A-wing",
+            "description": "The <italic>RZ-2 A-wing Expansion Pack</italic> for X-Wing Second Edition includes a beautifully-painted RZ-2 A-wing miniature for you to add to your squadron, and with the included dial, ship and upgrade cards it gives you everything you need to stand toe-to-toe with the First Order’s best!",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ22_RZ-2A-wing.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/rz-2-wing-expansion-pack/"
+        },
+        {
+            "id": 17,
+            "name": "Mining Guild TIE",
+            "description": "The <italic>Mining Guild TIE Expansion Pack</italic> includes one beautifully pre-painted miniature and all the ship and upgrade cards you need to supplement your own mining operations and keep the profits flowing.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ23_MiningGuildTIE.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/mining-guild-tie-expansion-pack/"
+        },
+        {
+            "id": 18,
+            "name": "T-70 X-wing",
+            "description": "The <italic>T-70 X-Wing Expansion Pack</italic> for X-Wing Second Edition includes a beautifully-painted T-70 X-wing miniature for you to add to your squadron, a maneuver dial, and all the ship and upgrade cards you need to grow your Resistance forces.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ25_T-70X-wing.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/x-wing-second-edition-t-70-x-wing-expansion-pack/"
+        },
+        {
+            "id": 19,
+            "name": "TIE/fo Fighter",
+            "description": "The <italic>TIE/fo Fighter Expansion Pack</italic> includes one beautifully pre-painted miniature and all the ship and upgrade cards you need, giving you all the raw power to begin rebuilding the Empire.",
+            "cover": "https://sb-cdn.fantasyflightgames.com/covers/SWZ26_TIEfo.png",
+            "url": "https://www.fantasyflightgames.com/en/products/x-wing-second-edition/products/x-wing-second-edition-tiefo-fighter-expansion-pack/"
+        }
+    ]
+}

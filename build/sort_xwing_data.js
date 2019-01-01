@@ -12,6 +12,17 @@ var cardsSortedFilePath = "./build/ffg/cards.sorted.json";
 fs.writeFileSync(cardsSortedFilePath, JSON.stringify(cardsJson, null, 4));
 console.log(` *CREATED ${cardsSortedFilePath} * \n`);
 
+/** Sort extensions.raw.json */
+var extensionsFilePath = "./build/ffg/extensions.raw.json"
+var extensionsContent = fs.readFileSync(extensionsFilePath);
+var extensionsJson = JSON.parse(extensionsContent);
+
+extensionsJson.extensions.sort(GetSortOrder("id"));
+
+var extensionsSortedFilePath = "./build/ffg/extensions.sorted.json";
+fs.writeFileSync(extensionsSortedFilePath, JSON.stringify(extensionsJson, null, 4));
+console.log(` *CREATED ${extensionsSortedFilePath} * \n`);
+
 /** Sort app-metadata.raw.json */
 var metadataFilePath = "./build/ffg/app-metadata.raw.json"
 var metadataContent = fs.readFileSync(metadataFilePath);
