@@ -1,6 +1,59 @@
 {
     "cards": [
         {
+            "id": 486,
+            "faction_id": null,
+            "card_set_ids": [],
+            "card_type_id": 2,
+            "available_actions": [
+                {
+                    "id": 17941,
+                    "base_action_id": 5,
+                    "related_action_id": null,
+                    "base_action_side_effect": null,
+                    "related_action_side_effect": null
+                },
+                {
+                    "id": 17942,
+                    "base_action_id": 2,
+                    "related_action_id": 5,
+                    "base_action_side_effect": null,
+                    "related_action_side_effect": "stress"
+                }
+            ],
+            "statistics": [],
+            "available_upgrades": [],
+            "restrictions": [
+                [
+                    {
+                        "type": "SHIP_TYPE",
+                        "kwargs": {
+                            "pk": 53,
+                            "raw_name": "T-70 X-wing"
+                        }
+                    }
+                ]
+            ],
+            "upgrade_types": [
+                18
+            ],
+            "weapon_range": null,
+            "image": "https://sb-cdn.fantasyflightgames.com/card_art/a8233a67adce770e91e4b6b9025670ed.jpg",
+            "card_image": "https://sb-cdn.fantasyflightgames.com/card_images/en/e3b44142faf0f13e541bf674a6c06dbc.png",
+            "name": "Integrated S-foils (Closed)",
+            "subtitle": null,
+            "ability_text": "While you perform a primary attack, if the defender is not in your <bullseye>, roll 1 fewer attack die.<return>Before you activate, you may flip this card.",
+            "cost": "0",
+            "ship_ability_text": null,
+            "ship_size": null,
+            "force_side": null,
+            "initiative": null,
+            "weapon_no_bonus": false,
+            "ffg_id": "XW_U_192b",
+            "is_unique": false,
+            "ship_type": null
+        },
+        {
             "id": 1,
             "faction_id": 1,
             "card_set_ids": [
@@ -33332,59 +33385,6 @@
             "ship_type": null
         },
         {
-            "id": 486,
-            "faction_id": null,
-            "card_set_ids": [],
-            "card_type_id": 2,
-            "available_actions": [
-                {
-                    "id": 17941,
-                    "base_action_id": 5,
-                    "related_action_id": null,
-                    "base_action_side_effect": null,
-                    "related_action_side_effect": null
-                },
-                {
-                    "id": 17942,
-                    "base_action_id": 2,
-                    "related_action_id": 5,
-                    "base_action_side_effect": null,
-                    "related_action_side_effect": "stress"
-                }
-            ],
-            "statistics": [],
-            "available_upgrades": [],
-            "restrictions": [
-                [
-                    {
-                        "type": "SHIP_TYPE",
-                        "kwargs": {
-                            "pk": 53,
-                            "raw_name": "T-70 X-wing"
-                        }
-                    }
-                ]
-            ],
-            "upgrade_types": [
-                18
-            ],
-            "weapon_range": null,
-            "image": null,
-            "card_image": null,
-            "name": "Integrated S-foils (Closed)",
-            "subtitle": null,
-            "ability_text": "While you perform a primary attack, if the defender is not in your <bullseye>, roll 1 fewer attack die.<return>Before you activate, you may flip this card.",
-            "cost": "0",
-            "ship_ability_text": null,
-            "ship_size": null,
-            "force_side": null,
-            "initiative": null,
-            "weapon_no_bonus": false,
-            "ffg_id": "XW_U_192b",
-            "is_unique": false,
-            "ship_type": null
-        },
-        {
             "id": 488,
             "faction_id": null,
             "card_set_ids": [
@@ -33451,7 +33451,7 @@
             ],
             "weapon_range": null,
             "image": "https://sb-cdn.fantasyflightgames.com/card_art/bf5e7b98158570f9d4fc259b5553f4ca.jpg",
-            "card_image": "https://sb-cdn.fantasyflightgames.com/card_images/en/e3b44142faf0f13e541bf674a6c06dbc.png",
+            "card_image": "https://sb-cdn.fantasyflightgames.com/card_images/en/49372b4efb974ff673a1b79441186fd5.png",
             "name": "Integrated S-foils (Open)",
             "subtitle": null,
             "ability_text": "Before you activate, you may flip this card.",
