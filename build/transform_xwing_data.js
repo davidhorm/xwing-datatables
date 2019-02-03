@@ -3,7 +3,18 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var glob = require("glob");
 
-console.log("\n *START TRANSFORM* \n");
+console.log("\n *START TRANSFORM* ");
+
+var shipsArray = {}; //used when parsing upgrades.json
+var metadata = getMetadata();
+var pilotsArray = [];
+var upgradesArray = [];
+
+/*
+var metadataFilePath = "./build/ffg/metadata.json";
+fs.writeFileSync(metadataFilePath, JSON.stringify(metadata, null, 4));
+console.log(`\n *CREATED ${metadataFilePath} * \n`);
+*/
 
 //create data folder before creating .json files
 mkdirp("./public/data", function (err) {
@@ -11,27 +22,97 @@ mkdirp("./public/data", function (err) {
     	console.error(err);
     }
     else {
-		setConditionsJson();
 		createPilotShipJson();
-		createUpgradesJson();
-		createDamageDeckJson();
+		//createUpgradesJson();
+		//createDamageDeckJson();
 		console.log("\n *END TRANSFORM * \n");
     }
-});
+}); 
 
-var shipsArray = {}; //used when parsing upgrades.json
-var conditions = {}; //some pilots and upgrade cards cause conditions
+function getMetadata() {
+	var metadataFilePath = "./build/ffg/app-metadata.sorted.json"
+	var metadataContent = fs.readFileSync(metadataFilePath);
+	var metadataJson = JSON.parse(metadataContent);
 
-function setConditionsJson() {
-	var conditionFilePath = "./submodules/xwing-data2/data/conditions/conditions.json"
-	var content = fs.readFileSync(conditionFilePath);
-	var json = JSON.parse(content);
-	json.forEach(condition => {
-		conditions[condition.xws] = condition;
-	});
+	var extensionsFilePath = "./build/ffg/extensions.sorted.json"
+	var extensionsContent = fs.readFileSync(extensionsFilePath);
+	var extensionsJson = JSON.parse(extensionsContent);
+
+	var conditionsFilePath = "./submodules/xwing-data2/data/conditions/conditions.json"
+	var conditionsContent = fs.readFileSync(conditionsFilePath);
+	var conditionsJson = { "conditions": JSON.parse(conditionsContent)};
+
+	return Object.assign(metadataJson, extensionsJson, conditionsJson);
 }
 
 function createPilotShipJson() {
+	var cardsFilePath = "./build/ffg/cards.sorted.json"
+	var cardsContent = fs.readFileSync(cardsFilePath);
+	var cardsJson = JSON.parse(cardsContent);
+
+	cardsJson.cards.forEach(card => {
+		//card.name
+		//card.card_set_ids
+		//card.available_actions
+		//card.statistics
+		//card.image
+		//card.card_image
+		//card.ability_text
+		//card.cost //todo: convert "*" via xwing-data2
+		//card.ship_ability_text //TODO; currently null or blank everywhere
+		//card.force_side //can be null
+		//card.is_unique
+		
+		if(card.card_type_id === 1) {
+			addPilotCard(card);
+		}
+		else if (card.card_type_id === 2) {
+			addUpgradeCard(card);
+		}
+		else {
+			console.log(`*UNKNOWN CARD TYPE: ${card.card_type_id}`);
+		}
+	});
+
+	console.log("done");
+
+	/*
+	var pilotsData = {"data": pilotsArray};
+	var pilotsDataFilePath = "./public/data/pilots.json";
+	fs.writeFileSync(pilotsDataFilePath, JSON.stringify(pilotsData));
+	console.log(`*CREATED ${pilotsDataFilePath} *`);*/
+}
+
+function addPilotCard(card) {
+	//card.faction_id
+	//card.available_upgrades
+	//card.subtitle
+	//card.ship_size
+	//card.initiative
+	//card.ship_type
+
+	//check assumptions
+	if(card.restrictions.length > 0) { console.log(`pilot id=${card.id} has ${card.restrictions.length} restrictions.`); }
+	if(card.upgrade_types.length > 0) { console.log(`pilot id=${card.id} has ${card.upgrade_types.length} upgrade_types.`); }
+	if(card.weapon_range !== null) { console.log(`pilot id=${card.id} has ${card.weapon_range} weapon_range.`); }
+	if(card.weapon_no_bonus === true) { console.log(`pilot id=${card.id} has ${card.weapon_no_bonus} weapon_no_bonus.`); }
+}
+
+function addUpgradeCard(card) {
+	//card.restrictions
+	//card.upgrade_types //slot
+	//card.weapon_range
+	//card.weapon_no_bonus
+	
+	//check assumptions
+	if(card.available_upgrades.length > 0) { console.log(`upgrade id=${card.id} has ${card.available_upgrades.length} available_upgrades.`); }
+	if(card.subtitle !== null) { console.log(`upgrade id=${card.id} has ${card.subtitle} subtitle.`); }
+	if(card.ship_size !== null) { console.log(`upgrade id=${card.id} has ${card.ship_size} ship_size.`); }
+	if(card.initiative !== null) { console.log(`upgrade id=${card.id} has ${card.initiative} initiative.`); }
+	if(card.ship_type !== null) { console.log(`upgrade id=${card.id} has ${card.ship_type} ship_type.`); }
+}
+
+function createPilotShipJson_old() {
     var pilotsArray = [];
 	var pilotsDir = "./submodules/xwing-data2/data/pilots/*/*.json"
 	var shipFilePaths = glob.sync(pilotsDir);
