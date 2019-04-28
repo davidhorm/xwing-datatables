@@ -1,6 +1,6 @@
 {
   "name": "xwing-datatables",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "private": true,
   "homepage": "https://davidhorm.github.io/xwing-datatables",
   "dependencies": {

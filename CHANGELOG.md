@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/davidhorm/xwing-datatables/compare/v0.16.0...v0.17.0) (2019-04-28)
+
+
+### Features
+
+* added json from https://squadbuilder.fantasyflightgames.com/api/cards/extensions/ ([2228979](https://github.com/davidhorm/xwing-datatables/commit/2228979))
+* sorting raw json files by id for easier diff ([57c133a](https://github.com/davidhorm/xwing-datatables/commit/57c133a))
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/davidhorm/xwing-datatables/compare/v0.15.0...v0.16.0) (2018-12-12)
 
